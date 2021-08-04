@@ -44,7 +44,7 @@ public class UsersDAO {
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO TABLE " + tableName + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+                    "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 
             stmt.setLong(1, user.getPrivateNum());
             stmt.setString(2, user.getName());
@@ -66,8 +66,8 @@ public class UsersDAO {
     }
 
 
-    // TODO: make user admin function
-    private boolean makeUserAdmin(double privateNum){
+    // TODO??: make user admin function
+    /*private boolean makeUserAdmin(double privateNum){
         return false;
-    }
+    }*/
 }

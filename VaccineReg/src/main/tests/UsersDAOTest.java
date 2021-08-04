@@ -19,7 +19,7 @@ public class UsersDAOTest extends TestCase {
         stmt.execute();
 
         // Create a new test table
-        stmt = con.prepareStatement("CREATE TABLE" + testTable + " (" +
+        stmt = con.prepareStatement("CREATE TABLE " + testTable + " (" +
                 "private_num 	BIGINT 		PRIMARY KEY, \n" +
                 "name 			CHAR(64) 	NOT NULL, \n" +
                 "last_name 		CHAR(64) 	NOT NULL, \n" +
@@ -37,7 +37,36 @@ public class UsersDAOTest extends TestCase {
     }
 
 
-    public void testBasic(){
+    public void testConstructor(){
+        try{
+            UsersDAO dao = new UsersDAO();
+        }catch (Exception ignored){
+            fail();
+        }
+    }
 
+
+    // tests add method, the method should not add users with same id/email
+    public void testAdd(){
+        UsersDAO dao = new UsersDAO(testTable);
+
+        boolean success = dao.addUser(new User(1, "name1", "lastname1",
+                "f", 45, "test1@freeuni.edu.ge", "test1", false));
+        assertTrue(success);
+
+        // user with same id
+        success = dao.addUser(new User(1, "name2", "lastname2",
+                "f", 45, "test2@freeuni.edu.ge", "test2", false));
+        assertFalse(success);
+
+        // user with same email
+        success = dao.addUser(new User(12, "name2", "lastname2",
+                "m", 45, "test1@freeuni.edu.ge", "test2", false));
+        assertFalse(success);
+
+        // new user with new id and email
+        success = dao.addUser(new User(121, "name2", "lastname2",
+                "m", 45, "newmail@freeuni.edu.ge", "test2", false));
+        assertTrue(success);
     }
 }

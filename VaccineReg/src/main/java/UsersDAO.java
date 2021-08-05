@@ -45,7 +45,7 @@ public class UsersDAO {
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+                    "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
             stmt.setLong(1, user.getPrivateNum());
             stmt.setString(2, user.getName());
@@ -55,6 +55,7 @@ public class UsersDAO {
             stmt.setString(6, user.getEmail());
             stmt.setString(7, user.getPassword());
             stmt.setBoolean(8, user.isAdmin());
+            stmt.setInt(9, user.getVaccinationCount());
             // TODO: registration_id
 
             stmt.execute();
@@ -96,9 +97,7 @@ public class UsersDAO {
                     res.getString("gender"),
                     res.getInt("age"),
                     res.getString("email"),
-                    res.getString("password"),
-                    res.getBoolean("is_admin")
-                    //TODO: registration id
+                    res.getString("password")
             );
 
         } catch (Exception ignored) {
@@ -130,9 +129,7 @@ public class UsersDAO {
                     res.getString("gender"),
                     res.getInt("age"),
                     res.getString("email"),
-                    res.getString("password"),
-                    res.getBoolean("is_admin")
-                    //TODO: registration id
+                    res.getString("password")
                     );
 
         } catch (Exception ignored) {

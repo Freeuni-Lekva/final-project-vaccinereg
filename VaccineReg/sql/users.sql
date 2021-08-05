@@ -12,7 +12,8 @@ CREATE TABLE users (
     age 			INT 		NOT NULL,
     email 			CHAR(128) 	NOT NULL UNIQUE,
     password 		CHAR(64) 	NOT NULL,
-    is_admin		BOOLEAN		NOT NULL
+    is_admin		BOOLEAN		NOT NULL,
+    vaccination_count INT       NOT NULL
     
     #vaccination_id INT 		FOREIGN KEY
 );

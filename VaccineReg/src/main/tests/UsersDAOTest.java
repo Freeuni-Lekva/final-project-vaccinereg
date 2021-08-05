@@ -28,7 +28,8 @@ public class UsersDAOTest extends TestCase {
                 "age 			INT 		NOT NULL, \n" +
                 "email 			CHAR(128) 	NOT NULL UNIQUE, \n" +
                 "password 		CHAR(64) 	NOT NULL, \n" +
-                "is_admin		BOOLEAN		NOT NULL \n" +
+                "is_admin		BOOLEAN		NOT NULL, \n" +
+                "vaccination_count INT       NOT NULL \n" +
 
                 //TODO: vaccination_id
         ");");
@@ -52,22 +53,22 @@ public class UsersDAOTest extends TestCase {
         UsersDAO dao = new UsersDAO(testTable);
 
         boolean success = dao.addUser(new User(1, "name1", "lastname1",
-                "f", 45, "test1@freeuni.edu.ge", "test1", false));
+                "f", 45, "test1@freeuni.edu.ge", "test1"));
         assertTrue(success);
 
         // user with same id
         success = dao.addUser(new User(1, "name2", "lastname2",
-                "f", 45, "test2@freeuni.edu.ge", "test2", false));
+                "f", 45, "test2@freeuni.edu.ge", "test2"));
         assertFalse(success);
 
         // user with same email
         success = dao.addUser(new User(12, "name2", "lastname2",
-                "m", 45, "test1@freeuni.edu.ge", "test2", false));
+                "m", 45, "test1@freeuni.edu.ge", "test2"));
         assertFalse(success);
 
         // new user with new id and email
         success = dao.addUser(new User(121, "name2", "lastname2",
-                "m", 45, "newmail@freeuni.edu.ge", "test2", false));
+                "m", 45, "newmail@freeuni.edu.ge", "test2"));
         assertTrue(success);
     }
 
@@ -77,9 +78,9 @@ public class UsersDAOTest extends TestCase {
         UsersDAO dao = new UsersDAO(testTable);
 
         User a = new User(1, "name1", "lastname1",
-                "f", 45, "test1@freeuni.edu.ge", "test1", false);
+                "f", 45, "test1@freeuni.edu.ge", "test1");
         User b = new User(2, "name1", "lastname1",
-                "f", 45, "test2@freeuni.edu.ge", "test1", false);
+                "f", 45, "test2@freeuni.edu.ge", "test1");
         dao.addUser(a);
         dao.addUser(b);
 
@@ -99,9 +100,9 @@ public class UsersDAOTest extends TestCase {
         UsersDAO dao = new UsersDAO(testTable);
 
         User a = new User(1, "name1", "lastname1",
-                "f", 45, "test1@freeuni.edu.ge", "test1", false);
+                "f", 45, "test1@freeuni.edu.ge", "test1");
         User b = new User(2, "name1", "lastname1",
-                "f", 45, "test2@freeuni.edu.ge", "test1", false);
+                "f", 45, "test2@freeuni.edu.ge", "test1");
         dao.addUser(a);
         dao.addUser(b);
 

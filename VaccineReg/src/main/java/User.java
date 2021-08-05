@@ -9,12 +9,13 @@ public class User {
     private final String email;
     private final String password;
     private boolean isAdmin;
+    private int vaccinationCount;
     // TODO: registration id
 
     public User(long privateNum, String name,
                 String lastName, String gender,
                 int age, String email,
-                String password, boolean isAdmin)
+                String password)
     {
         this.privateNum = privateNum;
         this.name = name;
@@ -23,7 +24,9 @@ public class User {
         this.age = age;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
+
+        this.isAdmin = false;
+        this.vaccinationCount = 0;
     }
 
 
@@ -66,6 +69,13 @@ public class User {
         isAdmin = admin;
     }
 
+    public int getVaccinationCount() {
+        return vaccinationCount;
+    }
+
+    public void setVaccinationCount(int vaccination_count) {
+        this.vaccinationCount = vaccination_count;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -52,4 +52,20 @@ public class UserTest extends TestCase {
         a.setAdmin(false);
         assertEquals(a.isAdmin(), false);
     }
+
+
+    public void testEquals(){
+        User a = new User(1, "name1", "lastname1",
+                "f", 45, "test1@freeuni.edu.ge", "test1", false);
+        User b = new User(2, "name1", "lastname1",
+                "f", 45, "test2@freeuni.edu.ge", "test1", false);
+
+        assertFalse(a.equals(b));
+        assertFalse(b.equals(a));
+
+        assertTrue(a.equals(new User(1, "name1", "lastname1",
+                "f", 45, "test1@freeuni.edu.ge", "test1", false)));
+        assertTrue(b.equals(new User(2, "name1", "lastname1",
+                "f", 45, "test2@freeuni.edu.ge", "test1", false)));
+    }
 }

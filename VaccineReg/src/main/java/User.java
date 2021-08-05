@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class User {
     private final long privateNum;
     private final String name;
@@ -62,5 +64,17 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+        return privateNum == user.privateNum && age == user.age && isAdmin == user.isAdmin &&
+                name.equals(user.name) && lastName.equals(user.lastName) && gender.equals(user.gender) &&
+                email.equals(user.email) && password.equals(user.password);
     }
 }

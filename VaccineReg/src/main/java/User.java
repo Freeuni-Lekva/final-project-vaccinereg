@@ -103,6 +103,6 @@ public class User {
         User user = (User) o;
         return privateNum == user.privateNum && age == user.age && isAdmin == user.isAdmin &&
                 name.equals(user.name) && lastName.equals(user.lastName) && gender.equals(user.gender) &&
-                email.equals(user.email) && password.equals(user.password);
+                email.equals(user.email) && password.equals(user.password) && vaccinationCount == user.vaccinationCount;
     }
 }

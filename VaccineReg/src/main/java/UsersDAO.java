@@ -2,6 +2,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class UsersDAO {
     private String tableName = "users";
@@ -70,4 +71,72 @@ public class UsersDAO {
     /*private boolean makeUserAdmin(double privateNum){
         return false;
     }*/
+
+
+    /**
+     * Finds user with the given private number
+     * @param privNum
+     * @return User class if found, null if not
+     */
+    public User getUserByPrivateNum(long privNum){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT * FROM " + tableName + " WHERE private_num = ?;");
+
+            stmt.setLong(1, privNum);
+            ResultSet res = stmt.executeQuery();
+
+            // Return null if result was not found
+            if( !res.next() ) return null;
+
+            return new User(res.getLong("private_num"),
+                    res.getString("name"),
+                    res.getString("last_name"),
+                    res.getString("gender"),
+                    res.getInt("age"),
+                    res.getString("email"),
+                    res.getString("password"),
+                    res.getBoolean("is_admin")
+                    //TODO: registration id
+            );
+
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+
+    /**
+     * Finds user with the given email
+     * @param email
+     * @return User class if found, null if not
+     */
+    public User getUserByEmail(String email){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT * FROM " + tableName + " WHERE email = ?;");
+
+            stmt.setString(1, email);
+            ResultSet res = stmt.executeQuery();
+
+            // Return null if result was not found
+            if( !res.next() ) return null;
+
+            return new User(res.getLong("private_num"),
+                    res.getString("name"),
+                    res.getString("last_name"),
+                    res.getString("gender"),
+                    res.getInt("age"),
+                    res.getString("email"),
+                    res.getString("password"),
+                    res.getBoolean("is_admin")
+                    //TODO: registration id
+                    );
+
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
 }

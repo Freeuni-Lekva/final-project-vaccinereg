@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 public class UsersDAOTest extends TestCase {
     public static final String testTable = "user_test_table";
 
+
     protected void setUp() throws Exception {
         BasicDataSource ds = new BasicDataSource();
         ds.setUrl("jdbc:mysql://" + DB.server + "/" + DB.database);
@@ -69,4 +70,49 @@ public class UsersDAOTest extends TestCase {
                 "m", 45, "newmail@freeuni.edu.ge", "test2", false));
         assertTrue(success);
     }
+
+
+    // tests getUserByPrivateNum method, the method should return null for unregistered users
+    public void testFindByPrivateNum(){
+        UsersDAO dao = new UsersDAO(testTable);
+
+        User a = new User(1, "name1", "lastname1",
+                "f", 45, "test1@freeuni.edu.ge", "test1", false);
+        User b = new User(2, "name1", "lastname1",
+                "f", 45, "test2@freeuni.edu.ge", "test1", false);
+        dao.addUser(a);
+        dao.addUser(b);
+
+
+        assertTrue(a.equals(dao.getUserByPrivateNum(1)));
+        assertTrue(b.equals(dao.getUserByPrivateNum(2)));
+
+        assertFalse(a.equals(dao.getUserByPrivateNum(2)));
+        assertFalse(b.equals(dao.getUserByPrivateNum(1)));
+
+        assertNull(dao.getUserByPrivateNum(123124124));
+    }
+
+
+    // tests getUserByEmail method, the method should return null for unregistered users
+    public void testFindByEmail(){
+        UsersDAO dao = new UsersDAO(testTable);
+
+        User a = new User(1, "name1", "lastname1",
+                "f", 45, "test1@freeuni.edu.ge", "test1", false);
+        User b = new User(2, "name1", "lastname1",
+                "f", 45, "test2@freeuni.edu.ge", "test1", false);
+        dao.addUser(a);
+        dao.addUser(b);
+
+
+        assertTrue(a.equals(dao.getUserByEmail("test1@freeuni.edu.ge")));
+        assertTrue(b.equals(dao.getUserByEmail("test2@freeuni.edu.ge")));
+
+        assertFalse(a.equals(dao.getUserByEmail("test2@freeuni.edu.ge")));
+        assertFalse(b.equals(dao.getUserByEmail("test1@freeuni.edu.ge")));
+
+        assertNull(dao.getUserByEmail("garbage"));
+    }
+
 }

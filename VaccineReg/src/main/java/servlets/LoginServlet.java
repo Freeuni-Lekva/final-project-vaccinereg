@@ -23,10 +23,13 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest req,
                        HttpServletResponse resp) throws ServletException, IOException
     {
+        // get dao and user parameters
         UsersDAO dao = (UsersDAO) req.getServletContext().getAttribute("usersDAO");
         String email = req.getParameter("email");
         String password= req.getParameter("password");
 
+
+        // try to log in
         User user = dao.getUserByEmail(email);
         if(user == null){
             req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);
@@ -40,22 +43,5 @@ public class LoginServlet extends HttpServlet {
                 req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);
             }
         }
-
-        /*AccountManager manager = (AccountManager) req.getServletContext().getAttribute("manager");
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-
-        if ( manager.userExists(username) ){
-            if ( manager.matchesPassword(username, password) ){
-                req.setAttribute("name", username);
-                req.getRequestDispatcher("WEB-INF/welcome.jsp").forward(req, resp);
-            }
-            else{
-                req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);
-            }
-        }
-        else{
-            req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);
-        }*/
     }
 }

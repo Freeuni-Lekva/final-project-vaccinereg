@@ -23,6 +23,7 @@ public class RegisterServlet extends HttpServlet {
     public void doPost(HttpServletRequest req,
                        HttpServletResponse resp) throws ServletException, IOException
     {
+        // create user from parameters from register servlet
         User user = new User(
                 Long.parseLong(req.getParameter("private_num")),
                 req.getParameter("name"),
@@ -34,6 +35,7 @@ public class RegisterServlet extends HttpServlet {
         );
 
 
+        // try to register the user
         UsersDAO dao = (UsersDAO) req.getServletContext().getAttribute("usersDAO");
         boolean success = dao.addUser(user);
 

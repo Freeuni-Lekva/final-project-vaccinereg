@@ -1,4 +1,5 @@
 import junit.framework.TestCase;
+import vaccinereg.User;
 
 public class UserTest extends TestCase {
 

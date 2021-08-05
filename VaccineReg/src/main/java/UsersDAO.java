@@ -97,7 +97,9 @@ public class UsersDAO {
                     res.getString("gender"),
                     res.getInt("age"),
                     res.getString("email"),
-                    res.getString("password")
+                    res.getString("password"),
+                    res.getBoolean("is_admin"),
+                    res.getInt("vaccination_count")
             );
 
         } catch (Exception ignored) {
@@ -129,7 +131,9 @@ public class UsersDAO {
                     res.getString("gender"),
                     res.getInt("age"),
                     res.getString("email"),
-                    res.getString("password")
+                    res.getString("password"),
+                    res.getBoolean("is_admin"),
+                    res.getInt("vaccination_count")
                     );
 
         } catch (Exception ignored) {

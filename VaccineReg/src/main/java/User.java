@@ -30,6 +30,24 @@ public class User {
     }
 
 
+    public User(long privateNum, String name,
+                String lastName, String gender,
+                int age, String email,
+                String password, boolean isAdmin,
+                int vaccinationCount)
+    {
+        this.privateNum = privateNum;
+        this.name = name;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.vaccinationCount = vaccinationCount;
+    }
+
+
     public long getPrivateNum() {
         return privateNum;
     }

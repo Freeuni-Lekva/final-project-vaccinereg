@@ -2,4 +2,4 @@
 /shelf/
 /.idea/workspace.xml
 /target/
-/src/main/java/DB.java
+src/main/java/vaccinereg/DB.java

@@ -1,4 +1,4 @@
-import java.util.Objects;
+package vaccinereg;
 
 public class User {
     private final long privateNum;

@@ -1,5 +1,6 @@
-import org.apache.commons.dbcp.BasicDataSource;
+package vaccinereg;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +78,7 @@ public class UsersDAO {
     /**
      * Finds user with the given private number
      * @param privNum
-     * @return User class if found, null if not
+     * @return tmp.User class if found, null if not
      */
     public User getUserByPrivateNum(long privNum){
         try {
@@ -111,7 +112,7 @@ public class UsersDAO {
     /**
      * Finds user with the given email
      * @param email
-     * @return User class if found, null if not
+     * @return tmp.User class if found, null if not
      */
     public User getUserByEmail(String email){
         try {

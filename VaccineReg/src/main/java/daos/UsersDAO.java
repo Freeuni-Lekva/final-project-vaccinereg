@@ -1,5 +1,7 @@
-package vaccinereg;
+package daos;
 
+import entities.User;
+import databaseconfigs.DB;
 import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,9 +57,8 @@ public class UsersDAO {
             stmt.setInt(5, user.getAge());
             stmt.setString(6, user.getEmail());
             stmt.setString(7, user.getPassword());
-            stmt.setBoolean(8, user.isAdmin());
-            stmt.setInt(9, user.getVaccinationCount());
-            // TODO: registration_id
+            stmt.setBoolean(8, user.getAdmin());
+            stmt.setLong(9, user.getReservationId());
 
             stmt.execute();
             con.close();
@@ -77,16 +78,16 @@ public class UsersDAO {
 
     /**
      * Finds user with the given private number
-     * @param privNum
+     * @param privateNum
      * @return tmp.User class if found, null if not
      */
-    public User getUserByPrivateNum(long privNum){
+    public User getUserByPrivateNum(long privateNum){
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "SELECT * FROM " + tableName + " WHERE private_num = ?;");
+                    "SELECT * FROM " + tableName + " WHERE id = ?;");
 
-            stmt.setLong(1, privNum);
+            stmt.setLong(1, privateNum);
             ResultSet res = stmt.executeQuery();
 
             // Return null if result was not found
@@ -100,7 +101,7 @@ public class UsersDAO {
                     res.getString("email"),
                     res.getString("password"),
                     res.getBoolean("is_admin"),
-                    res.getInt("vaccination_count")
+                    res.getLong("reservation_id")
             );
 
         } catch (Exception ignored) {
@@ -134,7 +135,7 @@ public class UsersDAO {
                     res.getString("email"),
                     res.getString("password"),
                     res.getBoolean("is_admin"),
-                    res.getInt("vaccination_count")
+                    res.getLong("reservation_id")
                     );
 
         } catch (Exception ignored) {

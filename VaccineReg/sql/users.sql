@@ -13,14 +13,8 @@ CREATE TABLE users (
     email 			CHAR(128) 	NOT NULL UNIQUE,
     password 		CHAR(64) 	NOT NULL,
     is_admin		BOOLEAN		NOT NULL,
-    vaccination_count INT       NOT NULL
-    
-    #vaccination_id INT 		FOREIGN KEY
-);
+    reservation_id  BIGINT,
 
-INSERT INTO users VALUES
-	(111231455, "Archil", "Ksovreli", "m", 20, "aksov19@freeuni.edu.ge", "achiachi", true, 1),
-    (221231455, "name1", "lastname1", "f", 45, "test1@freeuni.edu.ge", "test1", false, 0),
-    (291291495, "name2", "lastname2", "m", 27, "test2@gmail.com", "test2", false, 0),
-    (221239999, "name3", "lastname3", "f", 21, "test3@gmail.com", "test3", false, 0);
+    FOREIGN KEY (reservation_id) REFERENCES reservations(id)
+);
     

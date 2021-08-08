@@ -1,4 +1,8 @@
-CREATE TABLE vaccine_center (
+USE uni_oop_project;
+
+DROP TABLE IF EXISTS vaccine_centers;
+
+CREATE TABLE vaccine_centers (
     id BIGINT PRIMARY KEY,
     region_name CHAR(64) NOT NULL,
     city_name CHAR(64) NOT NULL,

@@ -27,7 +27,7 @@
                     </td></tr>
 
                 <tr><td>Birth Date:</td>
-                    <td><input type="date" name="birth_date" /></td></tr>
+                    <td><input type="date" name="birth_date" id="bday_input"/></td></tr>
 
                 <tr><td>E-mail:</td>
                     <td><input type="email" name="email" required/></td></tr>
@@ -38,6 +38,8 @@
 
             </table>
         </form>
-
+        <script>
+            document.getElementById('bday_input').value = new Date().toISOString().substring(0, 10);
+        </script>
     </body>
 </html>

@@ -17,9 +17,3 @@ CREATE TABLE users (
 
     #vaccination_id INT 		FOREIGN KEY
 );
-
-INSERT INTO users VALUES
-    (111231455, "Archil", "Ksovreli", "m", '2000-06-24', "aksov19@freeuni.edu.ge", "achiachi", true, 1),
-    (221231455, "name1", "lastname1", "f", '1967-11-08', "test1@freeuni.edu.ge", "test1", false, 0),
-    (291291495, "name2", "lastname2", "m", '1948-07-03', "test2@gmail.com", "test2", false, 0),
-    (221239999, "name3", "lastname3", "f", '1990-01-17', "test3@gmail.com", "test3", false, 0);

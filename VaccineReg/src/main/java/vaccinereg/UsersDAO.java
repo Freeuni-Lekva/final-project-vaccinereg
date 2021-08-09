@@ -4,6 +4,8 @@ import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class UsersDAO {
     private String tableName = "users";
@@ -12,7 +14,7 @@ public class UsersDAO {
 
     public UsersDAO(){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception ignored) {}
 
         ds = new BasicDataSource();
@@ -27,7 +29,7 @@ public class UsersDAO {
         this.tableName = tableName;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception ignored) {}
 
         ds = new BasicDataSource();
@@ -52,7 +54,7 @@ public class UsersDAO {
             stmt.setString(2, user.getName());
             stmt.setString(3, user.getLastName());
             stmt.setString(4, user.getGender());
-            stmt.setInt(5, user.getAge());
+            stmt.setDate(5, java.sql.Date.valueOf(user.getBirthDate()));
             stmt.setString(6, user.getEmail());
             stmt.setString(7, user.getPassword());
             stmt.setBoolean(8, user.isAdmin());
@@ -88,21 +90,7 @@ public class UsersDAO {
 
             stmt.setLong(1, privNum);
             ResultSet res = stmt.executeQuery();
-
-            // Return null if result was not found
-            if( !res.next() ) return null;
-
-            return new User(res.getLong("private_num"),
-                    res.getString("name"),
-                    res.getString("last_name"),
-                    res.getString("gender"),
-                    res.getInt("age"),
-                    res.getString("email"),
-                    res.getString("password"),
-                    res.getBoolean("is_admin"),
-                    res.getInt("vaccination_count")
-            );
-
+            return getUserResult(res);
         } catch (Exception ignored) {
             return null;
         }
@@ -122,23 +110,28 @@ public class UsersDAO {
 
             stmt.setString(1, email);
             ResultSet res = stmt.executeQuery();
-
-            // Return null if result was not found
-            if( !res.next() ) return null;
-
-            return new User(res.getLong("private_num"),
-                    res.getString("name"),
-                    res.getString("last_name"),
-                    res.getString("gender"),
-                    res.getInt("age"),
-                    res.getString("email"),
-                    res.getString("password"),
-                    res.getBoolean("is_admin"),
-                    res.getInt("vaccination_count")
-                    );
-
+            return getUserResult(res);
         } catch (Exception ignored) {
             return null;
         }
     }
+
+
+    private User getUserResult(ResultSet res) throws SQLException {
+        // Return null if result was not found
+        if( !res.next() ) return null;
+
+        return new User(res.getLong("private_num"),
+                res.getString("name"),
+                res.getString("last_name"),
+                res.getString("gender"),
+                res.getDate("birth_date").toLocalDate(),
+                res.getString("email"),
+                res.getString("password"),
+                res.getBoolean("is_admin"),
+                res.getInt("vaccination_count")
+        );
+    }
+
+
 }

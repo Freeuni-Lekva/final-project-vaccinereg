@@ -26,18 +26,20 @@
                         <input type="radio" name="gender" value="f" required/> Female
                     </td></tr>
 
-                <tr><td>Age:</td>
-                    <td><input type="number" name="age" required min="1" max="120"/></td></tr>
+                <tr><td>Birth Date:</td>
+                    <td><input type="date" name="birth_date" id="bday_input" required/></td></tr>
 
                 <tr><td>E-mail:</td>
                     <td><input type="email" name="email" required/></td></tr>
 
                 <tr><td>Password:</td>
                     <td><input type="password" name="password" required minlength="4"/></td>
-                    <td><input type="submit" value = "Register" /></td></tr>
+                    <td><input type="submit" value = "Register" id="input_button" /></td></tr>
 
             </table>
         </form>
-
+        <script>
+            document.getElementById('bday_input').value = new Date().toISOString().substring(0, 10);
+        </script>
     </body>
 </html>

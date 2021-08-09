@@ -1,5 +1,6 @@
 package servlets;
 
+import vaccinereg.HashPassword;
 import vaccinereg.User;
 import vaccinereg.UsersDAO;
 
@@ -26,12 +27,13 @@ public class LoginServlet extends HttpServlet {
         // get dao and user parameters
         UsersDAO dao = (UsersDAO) req.getServletContext().getAttribute("usersDAO");
         String email = req.getParameter("email");
-        String password= req.getParameter("password");
+        String password= HashPassword.getHash(req.getParameter("password"));
 
 
         // try to log in
         User user = dao.getUserByEmail(email);
         if(user == null){
+            req.setAttribute("email_typed", email);
             req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);
         }
         else{
@@ -40,6 +42,7 @@ public class LoginServlet extends HttpServlet {
                 req.getRequestDispatcher("WEB-INF/userpage.jsp").forward(req, resp);
             }
             else{
+                req.setAttribute("email_typed", email);
                 req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);
             }
         }

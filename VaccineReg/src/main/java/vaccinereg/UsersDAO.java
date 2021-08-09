@@ -4,6 +4,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 public class UsersDAO {
     private String tableName = "users";
@@ -52,7 +53,7 @@ public class UsersDAO {
             stmt.setString(2, user.getName());
             stmt.setString(3, user.getLastName());
             stmt.setString(4, user.getGender());
-            stmt.setInt(5, user.getAge());
+            stmt.setDate(5, java.sql.Date.valueOf(user.getBirthDate()));
             stmt.setString(6, user.getEmail());
             stmt.setString(7, user.getPassword());
             stmt.setBoolean(8, user.isAdmin());
@@ -96,7 +97,7 @@ public class UsersDAO {
                     res.getString("name"),
                     res.getString("last_name"),
                     res.getString("gender"),
-                    res.getInt("age"),
+                    res.getDate("birth_date").toLocalDate(),
                     res.getString("email"),
                     res.getString("password"),
                     res.getBoolean("is_admin"),
@@ -130,7 +131,7 @@ public class UsersDAO {
                     res.getString("name"),
                     res.getString("last_name"),
                     res.getString("gender"),
-                    res.getInt("age"),
+                    res.getDate("birth_date").toLocalDate(),
                     res.getString("email"),
                     res.getString("password"),
                     res.getBoolean("is_admin"),

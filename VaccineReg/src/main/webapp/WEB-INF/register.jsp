@@ -34,12 +34,24 @@
 
                 <tr><td>Password:</td>
                     <td><input type="password" name="password" required minlength="4"/></td>
-                    <td><input type="submit" value = "Register" /></td></tr>
+                    <td><input type="submit" value = "Register" id="input_button" /></td></tr>
 
             </table>
         </form>
         <script>
+            let bday = document.getElementById("bday_input");
+            let button = document.getElementById("input_button");
+            bday.addEventListener("change", Handler);
             document.getElementById('bday_input').value = new Date().toISOString().substring(0, 10);
+
+            function Handler() {
+                if (document.getElementById("bday_input").value.length === 10) {
+                    button.disabled = false;
+                } else {
+                    button.disabled = true;
+                }
+            }
+
         </script>
     </body>
 </html>

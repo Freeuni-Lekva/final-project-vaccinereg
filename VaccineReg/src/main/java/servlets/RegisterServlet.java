@@ -1,5 +1,6 @@
 package servlets;
 
+import vaccinereg.HashPassword;
 import vaccinereg.User;
 import vaccinereg.UsersDAO;
 
@@ -32,7 +33,7 @@ public class RegisterServlet extends HttpServlet {
                 req.getParameter("gender"),
                 LocalDate.parse(req.getParameter("birth_date")),
                 req.getParameter("email"),
-                req.getParameter("password")
+                HashPassword.getHash(req.getParameter("password"))
         );
 
 

@@ -1,5 +1,6 @@
 package servlets;
 
+import vaccinereg.HashPassword;
 import vaccinereg.User;
 import vaccinereg.UsersDAO;
 
@@ -26,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         // get dao and user parameters
         UsersDAO dao = (UsersDAO) req.getServletContext().getAttribute("usersDAO");
         String email = req.getParameter("email");
-        String password= req.getParameter("password");
+        String password= HashPassword.getHash(req.getParameter("password"));
 
 
         // try to log in

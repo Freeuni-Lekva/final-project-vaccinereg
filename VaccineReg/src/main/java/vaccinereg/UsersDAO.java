@@ -14,7 +14,7 @@ public class UsersDAO {
 
     public UsersDAO(){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception ignored) {}
 
         ds = new BasicDataSource();
@@ -29,7 +29,7 @@ public class UsersDAO {
         this.tableName = tableName;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception ignored) {}
 
         ds = new BasicDataSource();

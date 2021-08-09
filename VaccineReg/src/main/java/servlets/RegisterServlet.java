@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -29,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
                 req.getParameter("name"),
                 req.getParameter("last_name"),
                 req.getParameter("gender"),
-                Integer.parseInt(req.getParameter("age")),
+                LocalDate.parse(req.getParameter("birth_date")),
                 req.getParameter("email"),
                 req.getParameter("password")
         );

@@ -26,8 +26,8 @@
                         <input type="radio" name="gender" value="f" required/> Female
                     </td></tr>
 
-                <tr><td>Age:</td>
-                    <td><input type="number" name="age" required min="1" max="120"/></td></tr>
+                <tr><td>Birth Date:</td>
+                    <td><input type="date" name="birth_date" /></td></tr>
 
                 <tr><td>E-mail:</td>
                     <td><input type="email" name="email" required/></td></tr>

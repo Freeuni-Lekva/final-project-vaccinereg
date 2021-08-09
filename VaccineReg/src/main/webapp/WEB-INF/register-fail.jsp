@@ -27,7 +27,7 @@
                     </td></tr>
 
                 <tr><td>Birth Date:</td>
-                    <td><input type="date" name="birth_date" id="bday_input" /></td></tr>
+                    <td><input type="date" name="birth_date" id="bday_input" required/></td></tr>
 
                 <tr><td>E-mail:</td>
                     <td><input type="email" name="email" required/></td></tr>

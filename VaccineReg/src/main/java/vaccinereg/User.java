@@ -1,11 +1,14 @@
 package vaccinereg;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class User {
     private final long privateNum;
     private final String name;
     private final String lastName;
     private final String gender;
-    private final int age;
+    private final LocalDate birthDate;
     private final String email;
     private final String password;
     private boolean isAdmin;
@@ -14,14 +17,14 @@ public class User {
 
     public User(long privateNum, String name,
                 String lastName, String gender,
-                int age, String email,
+                LocalDate birthDate, String email,
                 String password)
     {
         this.privateNum = privateNum;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
-        this.age = age;
+        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
 
@@ -32,7 +35,7 @@ public class User {
 
     public User(long privateNum, String name,
                 String lastName, String gender,
-                int age, String email,
+                LocalDate birthDate, String email,
                 String password, boolean isAdmin,
                 int vaccinationCount)
     {
@@ -40,7 +43,7 @@ public class User {
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
-        this.age = age;
+        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
@@ -67,8 +70,18 @@ public class User {
         return gender;
     }
 
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
     public int getAge() {
-        return age;
+        LocalDate now= LocalDate.now();
+        int diff = now.getYear() - birthDate.getYear();
+        if (birthDate.getMonth().compareTo(now.getMonth()) > 0  ||
+                (birthDate.getMonth().compareTo(now.getMonth()) == 0 && birthDate.getDayOfMonth() > now.getDayOfMonth())) {
+            diff--;
+        }
+        return diff;
     }
 
     public String getEmail() {
@@ -101,7 +114,7 @@ public class User {
         if (!(o instanceof User)) return false;
 
         User user = (User) o;
-        return privateNum == user.privateNum && age == user.age && isAdmin == user.isAdmin &&
+        return privateNum == user.privateNum && birthDate.equals(user.birthDate) && isAdmin == user.isAdmin &&
                 name.equals(user.name) && lastName.equals(user.lastName) && gender.equals(user.gender) &&
                 email.equals(user.email) && password.equals(user.password) && vaccinationCount == user.vaccinationCount;
     }

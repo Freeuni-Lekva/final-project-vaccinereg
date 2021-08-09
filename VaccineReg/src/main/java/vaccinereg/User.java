@@ -27,7 +27,6 @@ public class User {
         this.birthDate = birthDate;
         this.email = email;
         this.password = password;
-
         this.isAdmin = false;
         this.vaccinationCount = 0;
     }
@@ -75,6 +74,7 @@ public class User {
     }
 
     public int getAge() {
+        if(birthDate == null) return -1;
         LocalDate now= LocalDate.now();
         int diff = now.getYear() - birthDate.getYear();
         if (birthDate.getMonth().compareTo(now.getMonth()) > 0  ||

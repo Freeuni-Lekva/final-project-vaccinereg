@@ -10,7 +10,7 @@
         <form action="/login" method="post">
             <table>
                 <tr><td>E-mail:</td>
-                    <td><input type="email" name="email" /></td></tr>
+                    <td><input type="email" name="email" value="<%= request.getAttribute("email_typed") %>"/></td></tr>
                 <tr><td>Password:</td>
                     <td><input type="password" name="password" /></td>
                     <td><input type="submit" value = "Login" /></td></tr>

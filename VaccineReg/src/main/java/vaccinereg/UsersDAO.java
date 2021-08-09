@@ -4,6 +4,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class UsersDAO {
@@ -89,21 +90,7 @@ public class UsersDAO {
 
             stmt.setLong(1, privNum);
             ResultSet res = stmt.executeQuery();
-
-            // Return null if result was not found
-            if( !res.next() ) return null;
-
-            return new User(res.getLong("private_num"),
-                    res.getString("name"),
-                    res.getString("last_name"),
-                    res.getString("gender"),
-                    res.getDate("birth_date").toLocalDate(),
-                    res.getString("email"),
-                    res.getString("password"),
-                    res.getBoolean("is_admin"),
-                    res.getInt("vaccination_count")
-            );
-
+            return getUserResult(res);
         } catch (Exception ignored) {
             return null;
         }
@@ -123,23 +110,28 @@ public class UsersDAO {
 
             stmt.setString(1, email);
             ResultSet res = stmt.executeQuery();
-
-            // Return null if result was not found
-            if( !res.next() ) return null;
-
-            return new User(res.getLong("private_num"),
-                    res.getString("name"),
-                    res.getString("last_name"),
-                    res.getString("gender"),
-                    res.getDate("birth_date").toLocalDate(),
-                    res.getString("email"),
-                    res.getString("password"),
-                    res.getBoolean("is_admin"),
-                    res.getInt("vaccination_count")
-                    );
-
+            return getUserResult(res);
         } catch (Exception ignored) {
             return null;
         }
     }
+
+
+    private User getUserResult(ResultSet res) throws SQLException {
+        // Return null if result was not found
+        if( !res.next() ) return null;
+
+        return new User(res.getLong("private_num"),
+                res.getString("name"),
+                res.getString("last_name"),
+                res.getString("gender"),
+                res.getDate("birth_date").toLocalDate(),
+                res.getString("email"),
+                res.getString("password"),
+                res.getBoolean("is_admin"),
+                res.getInt("vaccination_count")
+        );
+    }
+
+
 }

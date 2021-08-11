@@ -1,11 +1,11 @@
-package vaccinereg;
+package daos;
 
+import entities.User;
+import databaseconfigs.DB;
 import org.apache.commons.dbcp.BasicDataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+
 
 public class UsersDAO {
     private String tableName = "users";
@@ -57,9 +57,12 @@ public class UsersDAO {
             stmt.setDate(5, java.sql.Date.valueOf(user.getBirthDate()));
             stmt.setString(6, user.getEmail());
             stmt.setString(7, user.getPassword());
-            stmt.setBoolean(8, user.isAdmin());
-            stmt.setInt(9, user.getVaccinationCount());
-            // TODO: registration_id
+            stmt.setBoolean(8, user.getAdmin());
+            if(user.getReservationId() != null){
+                stmt.setLong(9, user.getReservationId());
+            }else{
+                stmt.setNull(9 , Types.NULL);
+            }
 
             stmt.execute();
             con.close();
@@ -79,17 +82,18 @@ public class UsersDAO {
 
     /**
      * Finds user with the given private number
-     * @param privNum
+     * @param privateNum
      * @return tmp.User class if found, null if not
      */
-    public User getUserByPrivateNum(long privNum){
+    public User getUserByPrivateNum(long privateNum){
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "SELECT * FROM " + tableName + " WHERE private_num = ?;");
+                    "SELECT * FROM " + tableName + " WHERE id = ?;");
 
-            stmt.setLong(1, privNum);
+            stmt.setLong(1, privateNum);
             ResultSet res = stmt.executeQuery();
+
             return getUserResult(res);
         } catch (Exception ignored) {
             return null;
@@ -110,6 +114,7 @@ public class UsersDAO {
 
             stmt.setString(1, email);
             ResultSet res = stmt.executeQuery();
+
             return getUserResult(res);
         } catch (Exception ignored) {
             return null;
@@ -129,7 +134,7 @@ public class UsersDAO {
                 res.getString("email"),
                 res.getString("password"),
                 res.getBoolean("is_admin"),
-                res.getInt("vaccination_count")
+                res.getLong("vaccination_count")
         );
     }
 

@@ -38,6 +38,7 @@
 
             </table>
         </form>
+
         <script>
             document.getElementById('bday_input').value = new Date().toISOString().substring(0, 10);
         </script>

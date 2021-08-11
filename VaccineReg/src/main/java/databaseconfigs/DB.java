@@ -1,4 +1,4 @@
-package vaccinereg;
+package databaseconfigs;
 
 /**
  * Static class that holds variables for connecting to the local MySQL database

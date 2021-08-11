@@ -1,8 +1,8 @@
 package servlets;
 
-import vaccinereg.HashPassword;
-import vaccinereg.User;
-import vaccinereg.UsersDAO;
+import entities.User;
+import daos.UsersDAO;
+import utils.HashPassword;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

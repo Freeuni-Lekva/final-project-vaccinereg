@@ -1,4 +1,4 @@
-package vaccinereg;
+package utils;
 
 import com.google.common.hash.Hashing;
 

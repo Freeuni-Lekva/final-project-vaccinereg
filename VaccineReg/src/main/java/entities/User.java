@@ -1,37 +1,49 @@
 package entities;
 
+import java.time.LocalDate;
+
 public class User {
     private long privateNum;
     private String name;
     private String lastName;
     private String gender;
-    private int age;
+    private LocalDate birthDate;
     private String email;
     private String password;
-    private Boolean isAdmin;
+    private boolean isAdmin;
     private Long reservationId;
 
-    public User(long privateNum, String name, String lastName, String gender, int age, String email, String password, Boolean isAdmin, Long reservationId) {
+    public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password, Boolean isAdmin, Long reservationId) {
         this.privateNum = privateNum;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
-        this.age = age;
+        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
         this.reservationId = reservationId;
     }
 
-    public User(long privateNum, String name, String lastName, String gender, int age, String email, String password) {
+    public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password, Long reservationId) {
         this.privateNum = privateNum;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
-        this.age = age;
+        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
-        this.isAdmin = false;
+        this.reservationId = reservationId;
+    }
+
+    public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password) {
+        this.privateNum = privateNum;
+        this.name = name;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.password = password;
     }
 
     public User() {
@@ -54,8 +66,8 @@ public class User {
         this.gender = gender;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setAge(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public void setEmail(String email) {
@@ -66,7 +78,7 @@ public class User {
         this.password = password;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
 
@@ -90,8 +102,8 @@ public class User {
         return gender;
     }
 
-    public Integer getAge() {
-        return age;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     public String getEmail() {
@@ -102,7 +114,7 @@ public class User {
         return password;
     }
 
-    public Boolean getAdmin() {
+    public boolean getAdmin() {
         return isAdmin;
     }
 
@@ -116,7 +128,7 @@ public class User {
         if (!(o instanceof User)) return false;
 
         User user = (User) o;
-        return (this.privateNum == user.getPrivateNum() && this.age == user.getAge() && this.isAdmin.equals(user.getAdmin()) &&
+        return (this.privateNum == user.getPrivateNum() && this.birthDate.equals(user.getBirthDate()) && this.isAdmin == user.getAdmin() &&
                 this.name.equals(user.getName()) && this.lastName.equals(user.getLastName()) && this.gender.equals(user.getGender()) &&
                 this.email.equals(user.getEmail()) && this.password.equals(user.getPassword()));
     }

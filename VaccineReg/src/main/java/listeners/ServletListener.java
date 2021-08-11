@@ -1,7 +1,7 @@
 package listeners;
 
 
-import vaccinereg.UsersDAO;
+import daos.UsersDAO;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 

@@ -3,9 +3,8 @@ package daos;
 import entities.User;
 import databaseconfigs.DB;
 import org.apache.commons.dbcp.BasicDataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
+import java.sql.*;
 
 public class UsersDAO {
     private String tableName = "users";
@@ -54,11 +53,15 @@ public class UsersDAO {
             stmt.setString(2, user.getName());
             stmt.setString(3, user.getLastName());
             stmt.setString(4, user.getGender());
-            stmt.setInt(5, user.getAge());
+            stmt.setDate(5, Date.valueOf(user.getBirthDate()));
             stmt.setString(6, user.getEmail());
             stmt.setString(7, user.getPassword());
             stmt.setBoolean(8, user.getAdmin());
-            stmt.setLong(9, user.getReservationId());
+            if(user.getReservationId() != null){
+                stmt.setLong(9, user.getReservationId());
+            }else{
+                stmt.setNull(9 , Types.NULL);
+            }
 
             stmt.execute();
             con.close();
@@ -97,7 +100,7 @@ public class UsersDAO {
                     res.getString("name"),
                     res.getString("last_name"),
                     res.getString("gender"),
-                    res.getInt("age"),
+                    res.getDate("birth_date").toLocalDate(),
                     res.getString("email"),
                     res.getString("password"),
                     res.getBoolean("is_admin"),
@@ -131,7 +134,7 @@ public class UsersDAO {
                     res.getString("name"),
                     res.getString("last_name"),
                     res.getString("gender"),
-                    res.getInt("age"),
+                    res.getDate("birth_date").toLocalDate(),
                     res.getString("email"),
                     res.getString("password"),
                     res.getBoolean("is_admin"),

@@ -9,7 +9,7 @@ CREATE TABLE users (
     name 			CHAR(64) 	NOT NULL,
     last_name 		CHAR(64) 	NOT NULL,
     gender 			CHAR(1)		NOT NULL,
-    age 			INT 		NOT NULL,
+    birth_date 		DATE 		NOT NULL,
     email 			CHAR(128) 	NOT NULL UNIQUE,
     password 		CHAR(64) 	NOT NULL,
     is_admin		BOOLEAN		NOT NULL,

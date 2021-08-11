@@ -1,8 +1,8 @@
 import junit.framework.TestCase;
 import org.apache.commons.dbcp.BasicDataSource;
-import vaccinereg.DB;
-import vaccinereg.User;
-import vaccinereg.UsersDAO;
+import databaseconfigs.DB;
+import entities.User;
+import daos.UsersDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

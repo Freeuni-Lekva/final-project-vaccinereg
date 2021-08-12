@@ -34,6 +34,8 @@ public class User {
         this.email = email;
         this.password = password;
         this.reservationId = reservationId;
+
+        this.isAdmin = false;
     }
 
     public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password) {
@@ -44,6 +46,9 @@ public class User {
         this.birthDate = birthDate;
         this.email = email;
         this.password = password;
+
+        this.isAdmin = false;
+        this.reservationId = null;
     }
 
     public User() {
@@ -120,6 +125,18 @@ public class User {
 
     public Long getReservationId() {
         return reservationId;
+    }
+
+    public int getAge() {
+        if(birthDate == null) return -1;
+
+        LocalDate now= LocalDate.now();
+        int diff = now.getYear() - birthDate.getYear();
+        if (birthDate.getMonth().compareTo(now.getMonth()) > 0  ||
+                (birthDate.getMonth().compareTo(now.getMonth()) == 0 && birthDate.getDayOfMonth() > now.getDayOfMonth())) {
+            diff--;
+        }
+        return diff;
     }
 
     @Override

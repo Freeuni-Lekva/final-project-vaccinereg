@@ -89,7 +89,7 @@ public class UsersDAO {
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "SELECT * FROM " + tableName + " WHERE id = ?;");
+                    "SELECT * FROM " + tableName + " WHERE private_num = ?;");
 
             stmt.setLong(1, privateNum);
             ResultSet res = stmt.executeQuery();
@@ -134,7 +134,7 @@ public class UsersDAO {
                 res.getString("email"),
                 res.getString("password"),
                 res.getBoolean("is_admin"),
-                res.getLong("vaccination_count")
+                res.getLong("reservation_id")
         );
     }
 

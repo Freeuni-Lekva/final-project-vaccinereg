@@ -33,9 +33,9 @@ public class UsersDAOTest extends TestCase {
                 "email 			CHAR(128) 	NOT NULL UNIQUE, \n" +
                 "password 		CHAR(64) 	NOT NULL, \n" +
                 "is_admin		BOOLEAN		NOT NULL, \n" +
-                "vaccination_count INT       NOT NULL \n" +
+                "reservation_id  BIGINT,\n" +
+                "FOREIGN KEY (reservation_id) REFERENCES reservations(id) \n" +
 
-                //TODO: vaccination_id
         ");");
 
         stmt.execute();

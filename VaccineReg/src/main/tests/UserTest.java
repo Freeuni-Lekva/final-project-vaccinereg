@@ -1,5 +1,5 @@
 import junit.framework.TestCase;
-import vaccinereg.User;
+import entities.User;
 
 import java.time.LocalDate;
 
@@ -18,9 +18,8 @@ public class UserTest extends TestCase {
         assertEquals(a.getAge(), 20);
         assertEquals(a.getEmail(), "mail");
         assertEquals(a.getPassword(), "pass");
-        assertEquals(a.isAdmin(), false);
-        assertEquals(0, a.getVaccinationCount());
-        // TODO: vaccination id
+        assertEquals(a.getAdmin(), false);
+        assertEquals(a.getReservationId(), null);
     }
 
 
@@ -36,7 +35,8 @@ public class UserTest extends TestCase {
         assertEquals(a.getAge(), -1);
         assertEquals(a.getEmail(), null);
         assertEquals(a.getPassword(), null);
-        assertEquals(a.isAdmin(), false);
+        assertEquals(a.getAdmin(), false);
+        assertEquals(a.getReservationId(), null);
     }
 
 
@@ -53,23 +53,11 @@ public class UserTest extends TestCase {
         assertEquals(a.getEmail(), "mail");
         assertEquals(a.getPassword(), "pass");
 
-        assertEquals(a.isAdmin(), false);
+        assertEquals(a.getAdmin(), false);
         a.setAdmin(true);
-        assertEquals(a.isAdmin(), true);
+        assertEquals(a.getAdmin(), true);
         a.setAdmin(false);
-        assertEquals(a.isAdmin(), false);
-    }
-
-
-    public void testSetVaccinationCount(){
-        User a = new User(12345, "test", "test2",
-                "m", LocalDate.of(1996, 06, 9), "mail", "pass");
-
-        assertEquals(0, a.getVaccinationCount());
-        a.setVaccinationCount(20);
-        assertEquals(20, a.getVaccinationCount());
-        a.setVaccinationCount(0);
-        assertEquals(0, a.getVaccinationCount());
+        assertEquals(a.getAdmin(), false);
     }
 
 

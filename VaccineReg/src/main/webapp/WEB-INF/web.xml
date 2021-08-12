@@ -14,6 +14,15 @@
     <servlet-class>servlets.RegisterServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>reservation-servlet</servlet-name>
+    <servlet-class>servlets.ReservationServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>cancel-servlet</servlet-name>
+    <servlet-class>servlets.CancelServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>login-servlet</servlet-name>
@@ -24,8 +33,21 @@
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>reservation-servlet</servlet-name>
+    <url-pattern>/reserve</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>cancel-servlet</servlet-name>
+    <url-pattern>/cancel</url-pattern>
+  </servlet-mapping>
+
+
   <listener>
     <listener-class>listeners.ServletListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>listeners.SessionListener</listener-class>
   </listener>
 
 </web-app>

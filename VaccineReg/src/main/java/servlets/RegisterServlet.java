@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         boolean success = dao.addUser(user);
 
         if(success){
-            req.setAttribute("privatenum", user.getPrivateNum());
+            req.getSession().setAttribute("user", user);
             req.getRequestDispatcher("WEB-INF/userpage.jsp").forward(req, resp);
         }
         else{

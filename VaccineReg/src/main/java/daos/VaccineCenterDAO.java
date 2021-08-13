@@ -15,12 +15,14 @@ public class VaccineCenterDAO {
     private String tableName = "vaccine_centers";
     private BasicDataSource ds;
 
-    public VaccineCenterDAO() throws ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        ds = new BasicDataSource();
-        ds.setUrl("jdbc:mysql://" + DB.server + "/" + DB.database);
-        ds.setUsername(DB.username);
-        ds.setPassword(DB.password);
+    public VaccineCenterDAO() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            ds = new BasicDataSource();
+            ds.setUrl("jdbc:mysql://" + DB.server + "/" + DB.database);
+            ds.setUsername(DB.username);
+            ds.setPassword(DB.password);
+        } catch (Exception ignored) {}
     }
 
     public void addVaccineCenter(VaccineCenter vaccineCenter) throws SQLException {
@@ -46,17 +48,21 @@ public class VaccineCenterDAO {
         return new VaccineCenter(res.getLong(1) , res.getString(2) , res.getString(3) , res.getString(4));
     }
 
-    public List<VaccineCenter> getAllVaccineCenters() throws SQLException {
-        Connection con = ds.getConnection();
-        PreparedStatement stmt = con.prepareStatement("SELECT * FROM " + tableName + " ;");
-        ResultSet res = stmt.executeQuery();
+    public List<VaccineCenter> getAllVaccineCenters() {
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM " + tableName + " ;");
+            ResultSet res = stmt.executeQuery();
 
-        List<VaccineCenter> result = new ArrayList<>();
-        while(res.next()){
-            result.add(new VaccineCenter(res.getLong(1) , res.getString(2) , res.getString(3) , res.getString(4)));
+            List<VaccineCenter> result = new ArrayList<>();
+            while (res.next()) {
+                result.add(new VaccineCenter(res.getLong(1), res.getString(2), res.getString(3), res.getString(4)));
+            }
+
+            return result;
+        } catch (Exception ignored) {
+            return null;
         }
-
-        return result;
     }
 
     public List<VaccineCenter> getVaccineCenterByRegionName(String regionName) throws SQLException {

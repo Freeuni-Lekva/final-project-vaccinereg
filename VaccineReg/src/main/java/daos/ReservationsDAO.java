@@ -95,7 +95,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
@@ -105,7 +105,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();
             vaxRes.next();
@@ -130,7 +130,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = " + region + ") " +
+                            "WHERE (region_name = \"" + region + "\") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
@@ -140,7 +140,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = " + region + ") " +
+                            "WHERE (region_name = \"" + region + "\") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();
             vaxRes.next();
@@ -203,8 +203,8 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
-                            "and (region_name = " + region + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
+                            "and (region_name = \"" + region + "\") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
@@ -214,8 +214,8 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
-                            "and (region_name = " + region + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
+                            "and (region_name = \"" + region + "\") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();
             vaxRes.next();
@@ -242,7 +242,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
@@ -253,7 +253,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();
@@ -281,7 +281,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = " + region + ") " +
+                            "WHERE (region_name = \"" + region + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
@@ -292,7 +292,7 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = " + region + ") " +
+                            "WHERE (region_name = \"" + region + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();
@@ -321,8 +321,8 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
-                            "and (region_name = " + region + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
+                            "and (region_name = \"" + region + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
@@ -333,8 +333,8 @@ public class ReservationsDAO {
                             "JOIN reservations r on r.id = users.reservation_id " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = " + gender + ") " +
-                            "and (region_name = " + region + ") " +
+                            "WHERE (gender = \"" + gender + "\") " +
+                            "and (region_name = \"" + region + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();

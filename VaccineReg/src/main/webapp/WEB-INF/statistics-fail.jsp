@@ -27,7 +27,7 @@
                         <select name="region">
                             <option value="n">(default)</option>
                             <%  for(VaccineCenter center : centers){ %>
-                            <option value=<%=center.getId()%>><%= center.getRegionName()%></option>
+                            <option value=<%=center.getRegionName()%>><%= center.getRegionName()%></option>
                             <% } %>
                         </select>
                     </td>

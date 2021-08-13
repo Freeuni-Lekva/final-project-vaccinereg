@@ -10,4 +10,8 @@
 <form action = "/login" method = "get">
     <input type ="submit" value = "Login">
 </form>
+
+<form action="/statistics" method="get">
+    <input type="submit" value="statistics">
+</form>
 </html>

@@ -13,6 +13,10 @@
     <servlet-name>register-servlet</servlet-name>
     <servlet-class>servlets.RegisterServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>statistics-servlet</servlet-name>
+    <servlet-class>servlets.StatisticsServlet</servlet-class>
+  </servlet>
 
 
   <servlet-mapping>
@@ -22,6 +26,10 @@
   <servlet-mapping>
     <servlet-name>register-servlet</servlet-name>
     <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>statistics-servlet</servlet-name>
+    <url-pattern>/statistics</url-pattern>
   </servlet-mapping>
 
   <listener>

@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         }
         else{
             if ( user.getPassword().equals(password) ){
-                req.setAttribute("privatenum", user.getPrivateNum());
+                req.getSession().setAttribute("user", user);
                 req.getRequestDispatcher("WEB-INF/userpage.jsp").forward(req, resp);
             }
             else{

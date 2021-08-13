@@ -36,6 +36,9 @@ public class StatisticsServlet extends HttpServlet {
             req.getRequestDispatcher("WEB-INF/statistics-fail.jsp").forward(req, resp);
         } else {
             ReservationsDAO reservationsDAO = (ReservationsDAO) req.getServletContext().getAttribute("reservationsDAO");
+            // rhour - reservation count for the last hour
+            // vhour - vaccination count for the last hour
+            // n is the default value for the filter
             if (!gender.equals("n") && !region.equals("n")) {
                 req.setAttribute("rhour", reservationsDAO.getCountByGenderAndRegionAndAgeByTime(gender, region, minAge, maxAge, 3600).getKey());
                 req.setAttribute("rday", reservationsDAO.getCountByGenderAndRegionAndAgeByTime(gender, region, minAge, maxAge, 24 * 3600).getKey());

@@ -56,7 +56,8 @@ public class ReservationsDAO {
     /**
      * Returns the count of every reservation during the last specified seconds
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations
+     * @return Returns the pair of counts for reservations and vaccinations.
+     * The key of the pair is the count of reservations, the value is for vaccinations.
      */
     public Pair<Integer, Integer> getAllReservationsCountByTime(long seconds) {
         try {

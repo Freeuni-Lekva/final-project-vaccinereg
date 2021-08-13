@@ -9,6 +9,9 @@
         <title>Welcome</title>
     </head>
     <body>
+
+        <h1>Welcome <%= request.getAttribute("privatenum") %></h1>
+        
         <h1>Welcome <%= user.getName() %> <%= user.getLastName() %>! </h1>
 
         <!-- Printing out reservation info -->
@@ -56,6 +59,11 @@
             }
         %>
         -->
+
+      
+    <form action="/statistics" method="get">
+        <input type="submit" value="statistics">
+    </form>
 
     </body>
 </html>

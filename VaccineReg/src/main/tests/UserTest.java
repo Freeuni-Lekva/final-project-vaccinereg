@@ -19,7 +19,6 @@ public class UserTest extends TestCase {
         assertEquals(a.getEmail(), "mail");
         assertEquals(a.getPassword(), "pass");
         assertEquals(a.getAdmin(), false);
-        assertEquals(a.getReservationId(), null);
     }
 
 
@@ -36,7 +35,6 @@ public class UserTest extends TestCase {
         assertEquals(a.getEmail(), null);
         assertEquals(a.getPassword(), null);
         assertEquals(a.getAdmin(), false);
-        assertEquals(a.getReservationId(), null);
     }
 
 

@@ -48,7 +48,7 @@ public class UsersDAO {
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                    "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 
             stmt.setLong(1, user.getPrivateNum());
             stmt.setString(2, user.getName());
@@ -58,11 +58,6 @@ public class UsersDAO {
             stmt.setString(6, user.getEmail());
             stmt.setString(7, user.getPassword());
             stmt.setBoolean(8, user.getAdmin());
-            if(user.getReservationId() != null){
-                stmt.setLong(9, user.getReservationId());
-            }else{
-                stmt.setNull(9 , Types.NULL);
-            }
 
             stmt.execute();
             con.close();
@@ -133,8 +128,7 @@ public class UsersDAO {
                 res.getDate("birth_date").toLocalDate(),
                 res.getString("email"),
                 res.getString("password"),
-                res.getBoolean("is_admin"),
-                res.getLong("reservation_id")
+                res.getBoolean("is_admin")
         );
     }
 

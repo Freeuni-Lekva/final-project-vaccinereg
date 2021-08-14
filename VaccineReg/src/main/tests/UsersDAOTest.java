@@ -32,10 +32,7 @@ public class UsersDAOTest extends TestCase {
                 "birth_date 	DATE 		NOT NULL, \n" +
                 "email 			CHAR(128) 	NOT NULL UNIQUE, \n" +
                 "password 		CHAR(64) 	NOT NULL, \n" +
-                "is_admin		BOOLEAN		NOT NULL, \n" +
-                "reservation_id  BIGINT,\n" +
-                "FOREIGN KEY (reservation_id) REFERENCES reservations(id) \n" +
-
+                "is_admin		BOOLEAN		NOT NULL \n" +
                 ");");
 
         stmt.execute();

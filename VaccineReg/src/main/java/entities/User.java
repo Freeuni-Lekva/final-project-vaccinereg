@@ -11,9 +11,9 @@ public class User {
     private String email;
     private String password;
     private boolean isAdmin;
-    private Long reservationId;
 
-    public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password, Boolean isAdmin, Long reservationId) {
+
+    public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password, Boolean isAdmin) {
         this.privateNum = privateNum;
         this.name = name;
         this.lastName = lastName;
@@ -22,21 +22,8 @@ public class User {
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
-        this.reservationId = reservationId;
     }
 
-    public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password, Long reservationId) {
-        this.privateNum = privateNum;
-        this.name = name;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.password = password;
-        this.reservationId = reservationId;
-
-        this.isAdmin = false;
-    }
 
     public User(long privateNum, String name, String lastName, String gender, LocalDate birthDate, String email, String password) {
         this.privateNum = privateNum;
@@ -48,7 +35,6 @@ public class User {
         this.password = password;
 
         this.isAdmin = false;
-        this.reservationId = null;
     }
 
     public User() {
@@ -87,10 +73,6 @@ public class User {
         isAdmin = admin;
     }
 
-    public void setReservationId(Long reservationId) {
-        this.reservationId = reservationId;
-    }
-
     public long getPrivateNum() {
         return privateNum;
     }
@@ -121,10 +103,6 @@ public class User {
 
     public boolean getAdmin() {
         return isAdmin;
-    }
-
-    public Long getReservationId() {
-        return reservationId;
     }
 
     public int getAge() {

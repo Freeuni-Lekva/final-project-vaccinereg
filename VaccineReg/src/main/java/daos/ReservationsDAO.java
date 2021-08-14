@@ -36,10 +36,8 @@ public class ReservationsDAO {
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO " + reservationsTableName + " VALUES (?, ?, ?, ?, ?);");
+                    "INSERT INTO " + reservationsTableName + " VALUES (?, ?, ?);");
 
-            stmt.setTimestamp(1, java.sql.Timestamp.valueOf(reservation.getStartTimeOne()));
-            stmt.setTimestamp(2, java.sql.Timestamp.valueOf(reservation.getStartTimeTwo()));
             stmt.setTimestamp(3, java.sql.Timestamp.valueOf(reservation.getVaccinationTime()));
             stmt.setTimestamp(4, java.sql.Timestamp.valueOf(reservation.getReservationTime()));
             stmt.setLong(5, reservation.getLocation_vaccine_amount_id());

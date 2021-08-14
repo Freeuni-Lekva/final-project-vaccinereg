@@ -8,6 +8,7 @@ import utils.Pair;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 
 public class ReservationsDAO {
     private String reservationsTableName = "reservations";
@@ -36,11 +37,16 @@ public class ReservationsDAO {
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO " + reservationsTableName + " VALUES (?, ?, ?);");
+                    "INSERT INTO " + reservationsTableName + " VALUES (?, ?, ?, ?);");
 
             stmt.setTimestamp(3, java.sql.Timestamp.valueOf(reservation.getVaccinationTime()));
             stmt.setTimestamp(4, java.sql.Timestamp.valueOf(reservation.getReservationTime()));
             stmt.setLong(5, reservation.getLocation_vaccine_amount_id());
+            if (reservation.getUser_id() != null){
+                stmt.setLong(9, reservation.getUser_id());
+            } else{
+                stmt.setNull(9 , Types.NULL);
+            }
 
             stmt.execute();
             con.close();

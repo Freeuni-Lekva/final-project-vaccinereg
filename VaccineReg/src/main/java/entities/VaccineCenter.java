@@ -5,18 +5,21 @@ public class VaccineCenter {
     private String regionName;
     private String cityName;
     private String districtName;
+    private Integer peopleLimitPerVaccineAtSameTime;
 
-    public VaccineCenter(Long id, String regionName, String cityName, String districtName) {
+    public VaccineCenter(Long id, String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime) {
         this.id = id;
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
+        this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
     }
 
-    public VaccineCenter(String regionName, String cityName, String districtName) {
+    public VaccineCenter(String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime) {
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
+        this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
     }
 
     public VaccineCenter() {
@@ -38,6 +41,10 @@ public class VaccineCenter {
     public String getDistrictName() {
         return districtName;
     }
+    
+    public Integer getPeopleLimitPerVaccineAtSameTime() {
+        return peopleLimitPerVaccineAtSameTime;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -54,6 +61,10 @@ public class VaccineCenter {
     public void setDistrictName(String districtName) {
         this.districtName = districtName;
     }
+    
+    public void setPeopleLimitPerVaccineAtSameTime(Integer peopleLimitPerVaccineAtSameTime) {
+        this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
+    }
 
     @Override
     public boolean equals(Object o){
@@ -61,6 +72,6 @@ public class VaccineCenter {
         if (!(o instanceof User)) return false;
 
         VaccineCenter v = (VaccineCenter) o;
-        return (this.id.equals(v.getId()) && this.regionName.equals(v.getRegionName()) && this.cityName.equals(v.getCityName()) && this.districtName.equals(v.getDistrictName()));
+        return (this.id.equals(v.getId()) && this.regionName.equals(v.getRegionName()) && this.cityName.equals(v.getCityName()) && this.districtName.equals(v.getDistrictName()) && this.peopleLimitPerVaccineAtSameTime.equals(v.getPeopleLimitPerVaccineAtSameTime()));
     }
 }

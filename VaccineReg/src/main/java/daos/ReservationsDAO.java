@@ -96,20 +96,16 @@ public class ReservationsDAO {
             Connection con = ds.getConnection();
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
-                            "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
-                            "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "WHERE (gender = \"" + gender + "\") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
             PreparedStatement vaxStmr = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
-                            "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
-                            "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "WHERE (gender = \"" + gender + "\") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();
@@ -133,8 +129,7 @@ public class ReservationsDAO {
             Connection con = ds.getConnection();
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (region_name = \"" + region + "\") " +
@@ -143,8 +138,7 @@ public class ReservationsDAO {
             resRes.next();
             PreparedStatement vaxStmr = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (region_name = \"" + region + "\") " +
@@ -171,20 +165,16 @@ public class ReservationsDAO {
             Connection con = ds.getConnection();
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
-                            "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
-                            "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "WHERE (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
             PreparedStatement vaxStmr = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
-                            "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
-                            "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "WHERE (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
             ResultSet vaxRes = vaxStmr.executeQuery();
@@ -209,8 +199,8 @@ public class ReservationsDAO {
             Connection con = ds.getConnection();
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (gender = \"" + gender + "\") " +
@@ -220,8 +210,8 @@ public class ReservationsDAO {
             resRes.next();
             PreparedStatement vaxStmr = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (gender = \"" + gender + "\") " +
@@ -250,10 +240,8 @@ public class ReservationsDAO {
             Connection con = ds.getConnection();
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
-                            "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
-                            "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "WHERE (gender = \"" + gender + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
@@ -261,10 +249,8 @@ public class ReservationsDAO {
             resRes.next();
             PreparedStatement vaxStmr = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
-                            "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
-                            "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "WHERE (gender = \"" + gender + "\") " +
                             "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
                             "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
@@ -291,8 +277,8 @@ public class ReservationsDAO {
             Connection con = ds.getConnection();
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (region_name = \"" + region + "\") " +
@@ -302,8 +288,8 @@ public class ReservationsDAO {
             resRes.next();
             PreparedStatement vaxStmr = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (region_name = \"" + region + "\") " +
@@ -333,8 +319,8 @@ public class ReservationsDAO {
             Connection con = ds.getConnection();
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (gender = \"" + gender + "\") " +
@@ -345,8 +331,8 @@ public class ReservationsDAO {
             resRes.next();
             PreparedStatement vaxStmr = con.prepareStatement(
                     "SELECT COUNT(*) " +
-                            "FROM users " +
-                            "JOIN reservations r on r.id = users.reservation_id " +
+                            "FROM reservations r " +
+                            "JOIN users u on r.user_id = u.private_num " +
                             "JOIN location_vaccine_amounts lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN vaccine_centers vc on vc.id = lva.vaccine_center_id " +
                             "WHERE (gender = \"" + gender + "\") " +

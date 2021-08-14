@@ -36,12 +36,27 @@ public class UsersDAOTest extends TestCase {
                 "reservation_id  BIGINT,\n" +
                 "FOREIGN KEY (reservation_id) REFERENCES reservations(id) \n" +
 
-        ");");
+                ");");
 
         stmt.execute();
+        con.close();
         super.setUp();
     }
 
+    @Override
+    protected void tearDown() throws Exception {
+        BasicDataSource ds = new BasicDataSource();
+        ds.setUrl("jdbc:mysql://" + DB.server + "/" + DB.database);
+        ds.setUsername(DB.username);
+        ds.setPassword(DB.password);
+
+        // Drop test table if it exists
+        Connection con = ds.getConnection();
+        PreparedStatement stmt = con.prepareStatement("DROP TABLE IF EXISTS " + DB.database + "." + testTable + ";");
+        stmt.execute();
+        con.close();
+        super.setUp();
+    }
 
     public void testConstructor(){
         try{

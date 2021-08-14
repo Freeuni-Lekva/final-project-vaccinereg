@@ -2,6 +2,7 @@ package daos;
 
 import databaseconfigs.DB;
 import entities.Reservation;
+import entities.User;
 import org.apache.commons.dbcp.BasicDataSource;
 import utils.Pair;
 
@@ -349,4 +350,37 @@ public class ReservationsDAO {
         }
     }
 
+
+    /**
+     * Gets the upcoming vaccination details for the given user.
+     * Returns null if not found.
+     * @param u
+     * @return
+     */
+    public Reservation getNextVaccination(User u){
+
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT id " +
+                            "FROM reservations " +
+                            "WHERE user_id = ? " +
+                            "AND NOW() > vaccination_time " +
+                            "ORDER BY vaccination_time DESC " +
+                            "LIMIT 1;");
+            stmt.setLong(1, u.getPrivateNum());
+            ResultSet res = stmt.executeQuery();
+            res.next();
+
+            return new Reservation(
+                    res.getLong(1),
+                    res.getTimestamp(2).toLocalDateTime(),
+                    res.getTimestamp(3).toLocalDateTime(),
+                    res.getLong(4),
+                    res.getLong(5));
+
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
 }

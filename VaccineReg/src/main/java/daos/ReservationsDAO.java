@@ -2,8 +2,8 @@ package daos;
 
 import databaseconfigs.DB;
 import entities.Reservation;
-import javafx.util.Pair;
 import org.apache.commons.dbcp.BasicDataSource;
+import utils.Pair;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -54,7 +54,7 @@ public class ReservationsDAO {
     /**
      * Returns the count of every reservation during the last specified seconds
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getAllReservationsCountByTime(long seconds) {
         try {
@@ -83,7 +83,7 @@ public class ReservationsDAO {
      * Returns the count of reservations by gender during the last specified seconds.
      * @param gender
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getCountByGenderByTime(String gender, long seconds) {
         try {
@@ -120,7 +120,7 @@ public class ReservationsDAO {
      * Returns the count of reservations by region during the last specified seconds.
      * @param region
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getCountByRegionByTime(String region, long seconds) {
         try {
@@ -158,7 +158,7 @@ public class ReservationsDAO {
      * @param min
      * @param max
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getCountByAgeByTime(int min, int max, long seconds) {
         try {
@@ -196,7 +196,7 @@ public class ReservationsDAO {
      * @param gender
      * @param region
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getCountByGenderAndRegionByTime(String gender, String region, long seconds) {
         try {
@@ -237,7 +237,7 @@ public class ReservationsDAO {
      * @param min
      * @param max
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getCountByGenderAndAgeByTime(String gender, int min, int max, long seconds) {
         try {
@@ -278,7 +278,7 @@ public class ReservationsDAO {
      * @param min
      * @param max
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getCountByRegionAndAgeByTime(String region, int min, int max, long seconds) {
         try {
@@ -320,7 +320,7 @@ public class ReservationsDAO {
      * @param min
      * @param max
      * @param seconds
-     * @return Returns the pair of counts for reservations and vaccinations.
+     * @return Returns the pair of counts for reservations(first) and vaccinations(second).
      */
     public Pair<Integer, Integer> getCountByGenderAndRegionAndAgeByTime(String gender, String region, int min, int max, long seconds) {
         try {

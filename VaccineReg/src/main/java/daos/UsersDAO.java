@@ -69,18 +69,12 @@ public class UsersDAO {
     }
 
 
-    // TODO??: make user admin function
-    /*private boolean makeUserAdmin(double privateNum){
-        return false;
-    }*/
-
-
     /**
      * Finds user with the given private number
      * @param privateNum
      * @return tmp.User class if found, null if not
      */
-    public User getUserByPrivateNum(long privateNum){
+    public User getUser(long privateNum){
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
@@ -89,7 +83,10 @@ public class UsersDAO {
             stmt.setLong(1, privateNum);
             ResultSet res = stmt.executeQuery();
 
-            return getUserResult(res);
+            User ans = getUserResult(res);
+            con.close();
+            return ans;
+
         } catch (Exception ignored) {
             return null;
         }
@@ -101,7 +98,7 @@ public class UsersDAO {
      * @param email
      * @return tmp.User class if found, null if not
      */
-    public User getUserByEmail(String email){
+    public User getUser(String email){
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
@@ -110,27 +107,110 @@ public class UsersDAO {
             stmt.setString(1, email);
             ResultSet res = stmt.executeQuery();
 
-            return getUserResult(res);
+            User ans = getUserResult(res);
+            con.close();
+            return ans;
+
         } catch (Exception ignored) {
             return null;
         }
     }
 
 
-    private User getUserResult(ResultSet res) throws SQLException {
-        // Return null if result was not found
-        if( !res.next() ) return null;
+    /**
+     * Builds a user object from the given result set
+     * @param res
+     * @return
+     */
+    private User getUserResult(ResultSet res){
+        try {
+            // Return null if result was not found
+            if (!res.next()) return null;
 
-        return new User(res.getLong("private_num"),
-                res.getString("name"),
-                res.getString("last_name"),
-                res.getString("gender"),
-                res.getDate("birth_date").toLocalDate(),
-                res.getString("email"),
-                res.getString("password"),
-                res.getBoolean("is_admin")
-        );
+            return new User(res.getLong("private_num"),
+                    res.getString("name"),
+                    res.getString("last_name"),
+                    res.getString("gender"),
+                    res.getDate("birth_date").toLocalDate(),
+                    res.getString("email"),
+                    res.getString("password"),
+                    res.getBoolean("is_admin")
+            );
+        }
+        catch(Exception e){
+            return null;
+        }
     }
 
 
+    /**
+     * Changes user's is_admin value in the database.
+     * Also changes the parameter u's isAdmin value.
+     * @param u
+     * @param isAdmin
+     */
+    public void setUserIsAdmin(User u, boolean isAdmin){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "UPDATE " + tableName + " SET is_admin = ? WHERE private_num = ?;");
+
+            stmt.setBoolean(1, isAdmin);
+            stmt.setLong(2, u.getPrivateNum());
+
+            stmt.execute();
+            con.close();
+
+            u.setAdmin(isAdmin);
+
+        } catch (Exception ignored) {
+
+        }
+    }
+
+
+    /**
+     * Changes user's is_admin value in the database
+     * @param privateNum
+     * @param isAdmin
+     */
+    public void setUserIsAdmin(Long privateNum, boolean isAdmin){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "UPDATE " + tableName + " SET is_admin = ? WHERE private_num = ?;");
+
+            stmt.setBoolean(1, isAdmin);
+            stmt.setLong(2, privateNum);
+
+            stmt.execute();
+            con.close();
+
+        } catch (Exception ignored) {
+
+        }
+    }
+
+
+    /**
+     * Changes user's is_admin value in the database
+     * @param email
+     * @param isAdmin
+     */
+    public void setUserIsAdmin(String email, boolean isAdmin){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "UPDATE " + tableName + " SET is_admin = ? WHERE email = ?;");
+
+            stmt.setBoolean(1, isAdmin);
+            stmt.setString(2, email);
+
+            stmt.execute();
+            con.close();
+
+        } catch (Exception ignored) {
+
+        }
+    }
 }

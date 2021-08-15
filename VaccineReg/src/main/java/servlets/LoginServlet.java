@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 
 
         // try to log in
-        User user = dao.getUserByEmail(email);
+        User user = dao.getUser(email);
         if(user == null){
             req.setAttribute("email_typed", email);
             req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);

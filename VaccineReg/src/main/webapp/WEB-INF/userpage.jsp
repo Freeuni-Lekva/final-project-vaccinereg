@@ -1,10 +1,11 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "entities.User" %>
-<%@ page import = "daos.UsersDAO" %>
+<%@ page import = "daos.ReservationsDAO" %>
 
 <html>
     <head>
-        <%  User user = (User) request.getSession().getAttribute("user"); %>
+        <%  User user = (User) request.getSession().getAttribute("user");
+            ReservationsDAO resDAO = (ReservationsDAO) request.getServletContext().getAttribute("reservationsDAO"); %>
 
         <title>Welcome</title>
     </head>
@@ -16,8 +17,7 @@
 
         <!-- Printing out reservation info -->
         <%
-            // 0 because NULL in the table defaults to 0
-            if (user.getReservationId() == 0){
+            if (resDAO.getNextVaccination(user) == null){
                 out.println(
                 "<p>" +
                     "You are not currently registered for a vaccine. " +

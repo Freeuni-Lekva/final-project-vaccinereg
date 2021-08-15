@@ -83,7 +83,10 @@ public class UsersDAO {
             stmt.setLong(1, privateNum);
             ResultSet res = stmt.executeQuery();
 
-            return getUserResult(res);
+            User ans = getUserResult(res);
+            con.close();
+            return ans;
+
         } catch (Exception ignored) {
             return null;
         }
@@ -104,7 +107,10 @@ public class UsersDAO {
             stmt.setString(1, email);
             ResultSet res = stmt.executeQuery();
 
-            return getUserResult(res);
+            User ans = getUserResult(res);
+            con.close();
+            return ans;
+
         } catch (Exception ignored) {
             return null;
         }

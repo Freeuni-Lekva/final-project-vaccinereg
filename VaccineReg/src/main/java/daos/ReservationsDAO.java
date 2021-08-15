@@ -86,14 +86,16 @@ public class ReservationsDAO {
             PreparedStatement resStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " " +
-                            "WHERE reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second );");
+                            "WHERE reservation_time >= DATE_SUB(NOW(), interval ? second );");
+            resStmt.setLong(1, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT Count(*) " +
                             "FROM " + reservationsTableName + " " +
-                            "WHERE vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second );");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE vaccination_time >= DATE_SUB(NOW(), interval ? second );");
+            vaxStmt.setLong(1, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();
@@ -116,17 +118,21 @@ public class ReservationsDAO {
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
+                            "WHERE (gender = ?) " +
+                            "and (reservation_time >= DATE_SUB(NOW(), interval ? second ));");
+            resStmt.setString(1, gender);
+            resStmt.setLong(2, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE (gender = ?) " +
+                            "and (vaccination_time >= DATE_SUB(NOW(), interval ? second ));");
+            vaxStmt.setString(1, gender);
+            vaxStmt.setLong(2, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();
@@ -150,18 +156,22 @@ public class ReservationsDAO {
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = \"" + region + "\") " +
-                            "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
+                            "WHERE (region_name = ?) " +
+                            "and (reservation_time >= DATE_SUB(NOW(), interval ? second ));");
+            resStmt.setString(1, region);
+            resStmt.setLong(2, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = \"" + region + "\") " +
-                            "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE (region_name = ?) " +
+                            "and (vaccination_time >= DATE_SUB(NOW(), interval ? second ));");
+            vaxStmt.setString(1, region);
+            vaxStmt.setLong(2, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();
@@ -185,17 +195,23 @@ public class ReservationsDAO {
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
-                            "WHERE (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
+                            "WHERE (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (reservation_time >= DATE_SUB(NOW(), interval ? second ));");
+            resStmt.setInt(1, min);
+            resStmt.setInt(2, max);
+            resStmt.setLong(3, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
-                            "WHERE (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (vaccination_time >= DATE_SUB(NOW(), interval ? second ));");
+            vaxStmt.setInt(1, min);
+            vaxStmt.setInt(2, max);
+            vaxStmt.setLong(3, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();
@@ -221,21 +237,27 @@ public class ReservationsDAO {
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (region_name = \"" + region + "\") " +
-                            "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
+                            "WHERE (gender = ?) " +
+                            "and (region_name = ?) " +
+                            "and (reservation_time >= DATE_SUB(NOW(), interval ? second ));");
+            resStmt.setString(1, gender);
+            resStmt.setString(2, region);
+            resStmt.setLong(3, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (region_name = \"" + region + "\") " +
-                            "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE (gender = ?) " +
+                            "and (region_name = ?) " +
+                            "and (vaccination_time >= DATE_SUB(NOW(), interval ? second ));");
+            vaxStmt.setString(1, gender);
+            vaxStmt.setString(2, region);
+            vaxStmt.setLong(3, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();
@@ -260,19 +282,27 @@ public class ReservationsDAO {
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
+                            "WHERE (gender = ?) " +
+                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (reservation_time >= DATE_SUB(NOW(), interval ? second ));");
+            resStmt.setString(1, gender);
+            resStmt.setInt(2, min);
+            resStmt.setInt(3, max);
+            resStmt.setLong(4, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE (gender = ?) " +
+                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (vaccination_time >= DATE_SUB(NOW(), interval ? second ));");
+            vaxStmt.setString(1, gender);
+            vaxStmt.setInt(2, min);
+            vaxStmt.setInt(3, max);
+            vaxStmt.setLong(4, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();
@@ -299,21 +329,29 @@ public class ReservationsDAO {
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = \"" + region + "\") " +
-                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
+                            "WHERE (region_name = ?) " +
+                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (reservation_time >= DATE_SUB(NOW(), interval ? second ));");
+            resStmt.setString(1, region);
+            resStmt.setInt(2, min);
+            resStmt.setInt(3, max);
+            resStmt.setLong(4, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (region_name = \"" + region + "\") " +
-                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE (region_name = ?) " +
+                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (vaccination_time >= DATE_SUB(NOW(), interval ? second ));");
+            vaxStmt.setString(1, region);
+            vaxStmt.setInt(2, min);
+            vaxStmt.setInt(3, max);
+            vaxStmt.setLong(4, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();
@@ -341,23 +379,33 @@ public class ReservationsDAO {
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (region_name = \"" + region + "\") " +
-                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (reservation_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
+                            "WHERE (gender = ?) " +
+                            "and (region_name = ?) " +
+                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (reservation_time >= DATE_SUB(NOW(), interval ? second ));");
+            resStmt.setString(1, gender);
+            resStmt.setString(2, region);
+            resStmt.setInt(3, min);
+            resStmt.setInt(4, max);
+            resStmt.setLong(5, seconds);
             ResultSet resRes = resStmt.executeQuery();
             resRes.next();
-            PreparedStatement vaxStmr = con.prepareStatement(
+            PreparedStatement vaxStmt = con.prepareStatement(
                     "SELECT COUNT(*) " +
                             "FROM " + reservationsTableName + " r " +
                             "JOIN " + usersTableName + " u on r.user_id = u.private_num " +
                             "JOIN " + amountsTableName + " lva on lva.id = r.location_vaccine_amount_id " +
                             "JOIN " + centersTableName + " vc on vc.id = lva.vaccine_center_id " +
-                            "WHERE (gender = \"" + gender + "\") " +
-                            "and (region_name = \"" + region + "\") " +
-                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between " + min + " AND " + max + ") " +
-                            "and (vaccination_time >= DATE_SUB(NOW(), interval " + seconds + " second ));");
-            ResultSet vaxRes = vaxStmr.executeQuery();
+                            "WHERE (gender = ?) " +
+                            "and (region_name = ?) " +
+                            "and (FLOOR(DATEDIFF(NOW(), birth_date) / 365.25) between ? AND ?) " +
+                            "and (vaccination_time >= DATE_SUB(NOW(), interval ? second ));");
+            vaxStmt.setString(1, gender);
+            vaxStmt.setString(2, region);
+            vaxStmt.setInt(3, min);
+            vaxStmt.setInt(4, max);
+            vaxStmt.setLong(5, seconds);
+            ResultSet vaxRes = vaxStmt.executeQuery();
             vaxRes.next();
             Pair<Integer, Integer> p = new Pair<>(resRes.getInt(1), vaxRes.getInt(1));
             con.close();

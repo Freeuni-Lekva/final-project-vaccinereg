@@ -176,6 +176,24 @@ public class VaccineCenterDAO {
         }
     }
 
+    public Long getIdByCenterName(String centerName){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT id FROM " + tableName + " WHERE center_name = ?;");
+            stmt.setString(1, centerName);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                Long result = new Long(res.getLong(1));
+                con.close();
+                return result;
+            }
+            con.close();
+            return null;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
     public void deleteVaccineCenterById(Long id) {
         try {
             Connection con = ds.getConnection();

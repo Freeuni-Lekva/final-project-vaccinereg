@@ -1,6 +1,7 @@
 package listeners;
 
 
+import daos.LocationDAO;
 import daos.ReservationsDAO;
 import daos.UsersDAO;
 import daos.VaccineCenterDAO;
@@ -15,9 +16,11 @@ public class ServletListener implements ServletContextListener {
         UsersDAO dao = new UsersDAO();
         ReservationsDAO reservationsDAO = new ReservationsDAO();
         VaccineCenterDAO vaccineCenterDAO = new VaccineCenterDAO();
+        LocationDAO locationDAO = new LocationDAO();
         servletContextEvent.getServletContext().setAttribute("usersDAO", dao);
         servletContextEvent.getServletContext().setAttribute("reservationsDAO", reservationsDAO);
         servletContextEvent.getServletContext().setAttribute("vaccineCenterDAO", vaccineCenterDAO);
+        servletContextEvent.getServletContext().setAttribute("locationDAO", locationDAO);
     }
 
     @Override

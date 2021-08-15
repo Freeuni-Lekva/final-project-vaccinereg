@@ -35,6 +35,10 @@
     <servlet-class>servlets.ReservationCenterServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>reservation-vaccine-servlet</servlet-name>
+    <servlet-class>servlets.ReservationVaccineServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>cancel-servlet</servlet-name>
     <servlet-class>servlets.CancelServlet</servlet-class>
   </servlet>
@@ -67,6 +71,10 @@
   <servlet-mapping>
     <servlet-name>reservation-center-servlet</servlet-name>
     <url-pattern>/reserve-center</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-vaccine-servlet</servlet-name>
+    <url-pattern>/reserve-vaccine</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>cancel-servlet</servlet-name>

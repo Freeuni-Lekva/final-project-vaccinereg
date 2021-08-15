@@ -23,7 +23,7 @@ public class ReservationRegionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String region = req.getParameter("region");
         req.setAttribute("region", region);
-        req.getRequestDispatcher("WEB-INF/reservation-city.jsp").forward(req, resp);
+        //req.getRequestDispatcher("WEB-INF/reservation-city.jsp").forward(req, resp);
     }
 
 }

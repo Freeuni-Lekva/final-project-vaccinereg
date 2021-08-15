@@ -19,7 +19,7 @@
   </servlet>
 
   <servlet>
-    <servlet-name>reservation-servlet</servlet-name>
+    <servlet-name>reservation-region-servlet</servlet-name>
     <servlet-class>servlets.ReservationRegionServlet</servlet-class>
   </servlet>
   <servlet>
@@ -42,8 +42,8 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>reservation-servlet</servlet-name>
-    <url-pattern>/reserve</url-pattern>
+    <servlet-name>reservation-region-servlet</servlet-name>
+    <url-pattern>/reserve-region</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>cancel-servlet</servlet-name>

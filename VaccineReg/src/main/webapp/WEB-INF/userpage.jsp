@@ -26,7 +26,7 @@
                 );
 
                 out.println(
-                "<form action=\"/reserve\" method=\"post\">" +
+                "<form action=\"/reserve-region\" method=\"post\">" +
                     "<input type=\"submit\" value=\"Register for a vaccine\" />" +
                 "</form>"
                 );

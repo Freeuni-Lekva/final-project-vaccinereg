@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1>temporary reservation page</h1>
-        <form action="/reservation" method="post">
+        <form action="/reserve-region" method="post">
             <table>
                 <tr>
                     <td>

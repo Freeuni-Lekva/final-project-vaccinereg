@@ -383,7 +383,7 @@ public class ReservationsDAO {
                             "FROM " + reservationsTableName + " " +
                             "WHERE user_id = ? " +
                             "AND NOW() < vaccination_time " +
-                            "ORDER BY vaccination_time DESC " +
+                            "ORDER BY vaccination_time ASC " +
                             "LIMIT 1;");
             stmt.setLong(1, u.getPrivateNum());
             ResultSet res = stmt.executeQuery();

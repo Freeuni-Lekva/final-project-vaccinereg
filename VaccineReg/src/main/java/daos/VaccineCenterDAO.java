@@ -25,17 +25,29 @@ public class VaccineCenterDAO {
         } catch (Exception ignored) {}
     }
 
+    public VaccineCenterDAO(String tableName) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            ds = new BasicDataSource();
+            ds.setUrl("jdbc:mysql://" + DB.server + "/" + DB.database);
+            ds.setUsername(DB.username);
+            ds.setPassword(DB.password);
+            this.tableName = tableName;
+        } catch (Exception ignored) {}
+    }
+
     public void addVaccineCenter(VaccineCenter vaccineCenter) {
         try {
             Connection con = ds.getConnection();
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO " + tableName + " VALUES (?, ?, ?);");
-            stmt.setString(1, vaccineCenter.getRegionName());
-            stmt.setString(2, vaccineCenter.getCityName());
-            stmt.setString(3, vaccineCenter.getDistrictName());
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?);");
+            stmt.setLong(1, vaccineCenter.getId());
+            stmt.setString(2, vaccineCenter.getRegionName());
+            stmt.setString(3, vaccineCenter.getCityName());
+            stmt.setString(4, vaccineCenter.getDistrictName());
+            stmt.setInt(5, vaccineCenter.getPeopleLimitPerVaccineAtSameTime());
             stmt.execute();
             con.close();
         } catch (Exception ignored) {
-
         }
     }
 

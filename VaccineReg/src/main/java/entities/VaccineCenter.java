@@ -6,19 +6,22 @@ public class VaccineCenter {
     private String cityName;
     private String districtName;
     private Integer peopleLimitPerVaccineAtSameTime;
+    private String centerName;
 
-    public VaccineCenter(Long id, String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime) {
+    public VaccineCenter(Long id, String regionName, String cityName, String districtName , String centerName, Integer peopleLimitPerVaccineAtSameTime) {
         this.id = id;
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
+        this.centerName = centerName;
         this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
     }
 
-    public VaccineCenter(String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime) {
+    public VaccineCenter(String regionName, String cityName, String districtName , String centerName, Integer peopleLimitPerVaccineAtSameTime) {
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
+        this.centerName = centerName;
         this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
     }
 
@@ -41,6 +44,10 @@ public class VaccineCenter {
     public String getDistrictName() {
         return districtName;
     }
+
+    public String getCenterName() {
+        return cityName;
+    }
     
     public Integer getPeopleLimitPerVaccineAtSameTime() {
         return peopleLimitPerVaccineAtSameTime;
@@ -60,6 +67,10 @@ public class VaccineCenter {
 
     public void setDistrictName(String districtName) {
         this.districtName = districtName;
+    }
+
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
     }
     
     public void setPeopleLimitPerVaccineAtSameTime(Integer peopleLimitPerVaccineAtSameTime) {

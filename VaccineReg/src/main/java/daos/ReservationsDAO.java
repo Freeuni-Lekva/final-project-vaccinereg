@@ -370,7 +370,9 @@ public class ReservationsDAO {
                             "LIMIT 1;");
             stmt.setLong(1, u.getPrivateNum());
             ResultSet res = stmt.executeQuery();
-            res.next();
+            con.close();
+
+            if(!res.next()) return null;
 
             return new Reservation(
                     res.getLong(1),

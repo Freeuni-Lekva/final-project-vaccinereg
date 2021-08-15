@@ -25,30 +25,18 @@ public class VaccineCenterDAO {
         } catch (Exception ignored) {}
     }
 
-    public VaccineCenterDAO(String tableName) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            ds = new BasicDataSource();
-            ds.setUrl("jdbc:mysql://" + DB.server + "/" + DB.database);
-            ds.setUsername(DB.username);
-            ds.setPassword(DB.password);
-            this.tableName = tableName;
-        } catch (Exception ignored) {}
-    }
+    public void addVaccineCenter(VaccineCenter vaccineCenter) throws SQLException {
 
-    public void addVaccineCenter(VaccineCenter vaccineCenter) {
-        try {
             Connection con = ds.getConnection();
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?);");
-            stmt.setLong(1, vaccineCenter.getId());
-            stmt.setString(2, vaccineCenter.getRegionName());
-            stmt.setString(3, vaccineCenter.getCityName());
-            stmt.setString(4, vaccineCenter.getDistrictName());
-            stmt.setInt(5, vaccineCenter.getPeopleLimitPerVaccineAtSameTime());
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO " + tableName + " (region_name, city_name, district_name, people_limit_per_vaccine_at_same_time, center_name)" + " VALUES (?, ?, ?, ?, ?);");
+            stmt.setString(1, vaccineCenter.getRegionName());
+            stmt.setString(2, vaccineCenter.getCityName());
+            stmt.setString(3, vaccineCenter.getDistrictName());
+            stmt.setInt(4, vaccineCenter.getPeopleLimitPerVaccineAtSameTime());
+            stmt.setString(5 , vaccineCenter.getCenterName());
             stmt.execute();
             con.close();
-        } catch (Exception ignored) {
-        }
+
     }
 
     public VaccineCenter getVaccineCenterById(Long id) {
@@ -60,7 +48,7 @@ public class VaccineCenterDAO {
             if (!res.next()) {
                 return null;
             }
-            VaccineCenter vaccineCenter = new VaccineCenter(res.getLong(1), res.getString(2), res.getString(3), res.getString(4) , res.getInt(5));
+            VaccineCenter vaccineCenter = new VaccineCenter(res.getLong(1), res.getString(2), res.getString(3), res.getString(4) , res.getInt(6) , res.getString(5));
             con.close();
             return vaccineCenter;
         } catch (Exception ignored) {
@@ -76,7 +64,7 @@ public class VaccineCenterDAO {
 
             List<VaccineCenter> result = new ArrayList<>();
             while (res.next()) {
-                result.add(new VaccineCenter(res.getLong(1), res.getString(2), res.getString(3), res.getString(4) , res.getInt(5)));
+                result.add(new VaccineCenter(res.getLong(1) , res.getString(2) , res.getString(3) , res.getString(4) , res.getInt(6) , res.getString(5)));
             }
             con.close();
             return result;
@@ -94,7 +82,7 @@ public class VaccineCenterDAO {
 
             List<VaccineCenter> result = new ArrayList<>();
             while (res.next()) {
-                result.add(new VaccineCenter(res.getLong(1), res.getString(2), res.getString(3), res.getString(4) , res.getInt(5)));
+                result.add(new VaccineCenter(res.getLong(1) , res.getString(2) , res.getString(3) , res.getString(4) , res.getInt(6) , res.getString(5)));
             }
             con.close();
             return result;
@@ -112,7 +100,7 @@ public class VaccineCenterDAO {
 
             List<VaccineCenter> result = new ArrayList<>();
             while (res.next()) {
-                result.add(new VaccineCenter(res.getLong(1), res.getString(2), res.getString(3), res.getString(4) , res.getInt(5)));
+                result.add(new VaccineCenter(res.getLong(1) , res.getString(2) , res.getString(3) , res.getString(4) , res.getInt(6) , res.getString(5)));
             }
             con.close();
             return result;
@@ -130,7 +118,7 @@ public class VaccineCenterDAO {
 
             List<VaccineCenter> result = new ArrayList<>();
             while (res.next()) {
-                result.add(new VaccineCenter(res.getLong(1), res.getString(2), res.getString(3), res.getString(4) , res.getInt(5)));
+                result.add(new VaccineCenter(res.getLong(1) , res.getString(2) , res.getString(3) , res.getString(4) , res.getInt(6) , res.getString(5)));
             }
             con.close();
             return result;
@@ -192,4 +180,3 @@ public class VaccineCenterDAO {
 
 
 }
-

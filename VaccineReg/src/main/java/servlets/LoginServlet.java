@@ -3,10 +3,12 @@ import entities.User;
 import daos.UsersDAO;
 import utils.HashPassword;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
@@ -15,7 +17,12 @@ public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest req,
                       HttpServletResponse resp) throws ServletException, IOException
     {
-        req.getRequestDispatcher("WEB-INF/login.jsp").forward(req, resp);
+        HttpSession session = req.getSession();
+        if(session.getAttribute("user") != null){
+            req.getRequestDispatcher("WEB-INF/adminpage.jsp").forward(req , resp);
+        }else {
+            req.getRequestDispatcher("WEB-INF/login.jsp").forward(req, resp);
+        }
     }
 
 
@@ -30,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 
 
         // try to log in
-        User user = dao.getUser(email);
+        User user = dao.getUserByEmail(email);
         if(user == null){
             req.setAttribute("email_typed", email);
             req.getRequestDispatcher("WEB-INF/login-fail.jsp").forward(req, resp);
@@ -38,7 +45,11 @@ public class LoginServlet extends HttpServlet {
         else{
             if ( user.getPassword().equals(password) ){
                 req.getSession().setAttribute("user", user);
-                req.getRequestDispatcher("WEB-INF/userpage.jsp").forward(req, resp);
+                if(!user.getAdmin()) {
+                    req.getRequestDispatcher("WEB-INF/userpage.jsp").forward(req, resp);
+                }else{
+                    req.getRequestDispatcher("WEB-INF/adminpage.jsp").forward(req , resp);
+                }
             }
             else{
                 req.setAttribute("email_typed", email);

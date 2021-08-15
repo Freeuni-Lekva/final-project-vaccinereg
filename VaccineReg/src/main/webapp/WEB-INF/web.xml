@@ -20,7 +20,7 @@
 
   <servlet>
     <servlet-name>reservation-servlet</servlet-name>
-    <servlet-class>servlets.ReservationServlet</servlet-class>
+    <servlet-class>servlets.ReservationRegionServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>cancel-servlet</servlet-name>

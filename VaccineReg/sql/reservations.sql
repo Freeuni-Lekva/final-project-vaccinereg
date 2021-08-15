@@ -3,7 +3,7 @@ USE uni_oop_project;
 DROP TABLE IF EXISTS reservations;
 
 CREATE TABLE reservations (
-    id BIGINT PRIMARY KEY,
+    id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     reservation_time DATETIME NOT NULL,
     vaccination_time DATETIME NOT NULL,
     location_vaccine_amount_id BIGINT,

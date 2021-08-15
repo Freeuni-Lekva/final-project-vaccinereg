@@ -1,7 +1,5 @@
 package utils;
 
-import java.util.Objects;
-
 public class Pair<U, V> {
     private U first;
     private V second;
@@ -10,8 +8,6 @@ public class Pair<U, V> {
         this.first = first;
         this.second = second;
     }
-
-    public Pair() {}
 
     public U getFirst() {
         return first;
@@ -27,13 +23,5 @@ public class Pair<U, V> {
 
     public void setSecond(V second) {
         this.second = second;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pair)) return false;
-        Pair<?, ?> pair = (Pair<?, ?>) o;
-        return first.equals(pair.first) && second.equals(pair.second);
     }
 }

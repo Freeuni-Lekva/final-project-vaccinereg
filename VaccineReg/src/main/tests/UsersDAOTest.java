@@ -101,13 +101,13 @@ public class UsersDAOTest extends TestCase {
         dao.addUser(b);
 
 
-        assertTrue(a.equals(dao.getUser(1)));
-        assertTrue(b.equals(dao.getUser(2)));
+        assertTrue(a.equals(dao.getUserByPrivateNum(1)));
+        assertTrue(b.equals(dao.getUserByPrivateNum(2)));
 
-        assertFalse(a.equals(dao.getUser(2)));
-        assertFalse(b.equals(dao.getUser(1)));
+        assertFalse(a.equals(dao.getUserByPrivateNum(2)));
+        assertFalse(b.equals(dao.getUserByPrivateNum(1)));
 
-        assertNull(dao.getUser(123124124));
+        assertNull(dao.getUserByPrivateNum(123124124));
     }
 
 
@@ -123,39 +123,13 @@ public class UsersDAOTest extends TestCase {
         dao.addUser(b);
 
 
-        assertTrue(a.equals(dao.getUser("test1@freeuni.edu.ge")));
-        assertTrue(b.equals(dao.getUser("test2@freeuni.edu.ge")));
+        assertTrue(a.equals(dao.getUserByEmail("test1@freeuni.edu.ge")));
+        assertTrue(b.equals(dao.getUserByEmail("test2@freeuni.edu.ge")));
 
-        assertFalse(a.equals(dao.getUser("test2@freeuni.edu.ge")));
-        assertFalse(b.equals(dao.getUser("test1@freeuni.edu.ge")));
+        assertFalse(a.equals(dao.getUserByEmail("test2@freeuni.edu.ge")));
+        assertFalse(b.equals(dao.getUserByEmail("test1@freeuni.edu.ge")));
 
-        assertNull(dao.getUser("garbage"));
+        assertNull(dao.getUserByEmail("garbage"));
     }
 
-    public void testSetUserIsAdmin(){
-        UsersDAO dao = new UsersDAO(testTable);
-
-        User a = new User(1, "name1", "lastname1",
-                "f", LocalDate.of(2001, 01, 01), "test1@freeuni.edu.ge", "test1");
-        User b = new User(2, "name1", "lastname1",
-                "f", LocalDate.of(2001, 01, 01), "test2@freeuni.edu.ge", "test1");
-        User c = new User(3, "name1", "lastname1",
-                "f", LocalDate.of(2001, 01, 01), "test3@freeuni.edu.ge", "test1");
-        dao.addUser(a);
-        dao.addUser(b);
-        dao.addUser(c);
-
-        // using the User object
-        dao.setUserIsAdmin(a, true);
-        assertTrue(a.getAdmin());
-        assertTrue(dao.getUser(a.getEmail()).getAdmin());
-
-        // using the private number
-        dao.setUserIsAdmin(b.getPrivateNum(), true);
-        assertTrue(dao.getUser(a.getPrivateNum()).getAdmin());
-
-        // using the email
-        dao.setUserIsAdmin(c.getEmail(), true);
-        assertTrue(dao.getUser(a.getEmail()).getAdmin());
-    }
 }

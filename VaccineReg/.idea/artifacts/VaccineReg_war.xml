@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="VaccineReg:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>VaccineReg</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="VaccineReg.war">
+      <element id="artifact" artifact-name="VaccineReg:war exploded" />
+    </root>
+  </artifact>
+</component>

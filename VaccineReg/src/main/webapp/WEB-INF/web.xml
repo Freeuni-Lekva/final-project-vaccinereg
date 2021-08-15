@@ -39,6 +39,10 @@
     <servlet-class>servlets.ReservationVaccineServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>reservation-date-servlet</servlet-name>
+    <servlet-class>servlets.ReservationDateServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>cancel-servlet</servlet-name>
     <servlet-class>servlets.CancelServlet</servlet-class>
   </servlet>
@@ -75,6 +79,10 @@
   <servlet-mapping>
     <servlet-name>reservation-vaccine-servlet</servlet-name>
     <url-pattern>/reserve-vaccine</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-date-servlet</servlet-name>
+    <url-pattern>/reserve-date</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>cancel-servlet</servlet-name>

@@ -3,18 +3,19 @@
 <%@ page import="daos.VaccineCenterDAO" %>
 <%@ page import="databaseconfigs.DB" %>
 <%@ page import="utils.Pair" %>
+<%@ page import="java.time.LocalDate" %>
 
-<% List<Pair<String, Integer> > vacAmounts = (List<Pair<String, Integer> >) request.getServletContext().getAttribute("vacAmounts");%>
 <% String reg = (String) request.getServletContext().getAttribute("region");%>
 <% String city = (String) request.getServletContext().getAttribute("city");%>
 <% String dis = (String) request.getServletContext().getAttribute("district");%>
 <% String cen = (String) request.getServletContext().getAttribute("center");%>
+<% String vacAmount = (String) request.getServletContext().getAttribute("center");%>
 <html>
 <head>
     <title>Reservation</title>
 </head>
 <body>
-<h2>Step 5</h2>
+<h2>Step 6</h2>
 <form action="/reserve-date" method="post">
 
     <table>
@@ -72,14 +73,23 @@
         </tr>
         <tr>
             <td>
-                Choose A Vaccine:
+                Vaccine:
             </td>
             <td>
-                <select name="vaccines" id="vac">
-                    <%  for(Pair<String, Integer> p : vacAmounts){ %>
-                    <option value=<%=p.getFirst()%>><%=p.getFirst()%>  (<%=p.getSecond()%>)</option>
-                    <% } %>
+                <select name="vacAmount" id="vac">
+                    <option value="<%=vacAmount %>"><%=vacAmount %></option>
                 </select>
+
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Choose A Date:
+            </td>
+            <td>
+                <input type="date" name="date" min="<%= LocalDate.now().plusDays(1)%>" placeholder="<%= LocalDate.now().plusDays(1)%>">
             </td>
             <td>
                 <input type="submit" value="Choose">

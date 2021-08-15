@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-
-public class ReservationRegionServlet extends HttpServlet {
-
+public class ReservationCityServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         VaccineCenterDAO vaccineCenterDAO = (VaccineCenterDAO) req.getServletContext().getAttribute("vaccineCenterDAO");
         List<VaccineCenter> centers = vaccineCenterDAO.getAllVaccineCenters();
-        req.getServletContext().setAttribute("centers", centers);
-        req.getRequestDispatcher("WEB-INF/reservation-region.jsp").forward(req, resp);
+        String region = req.getParameter("region");
+        req.getServletContext().setAttribute("region", region);
+        List<String> cities = vaccineCenterDAO.getCityByRegionName(region);
+        req.getServletContext().setAttribute("cities", cities);
+        req.getRequestDispatcher("WEB-INF/reservation-city.jsp").forward(req, resp);
     }
-
 }

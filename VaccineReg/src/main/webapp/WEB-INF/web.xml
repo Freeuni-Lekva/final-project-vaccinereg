@@ -23,6 +23,18 @@
     <servlet-class>servlets.ReservationRegionServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>reservation-city-servlet</servlet-name>
+    <servlet-class>servlets.ReservationCityServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-district-servlet</servlet-name>
+    <servlet-class>servlets.ReservationDistrictServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-center-servlet</servlet-name>
+    <servlet-class>servlets.ReservationCenterServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>cancel-servlet</servlet-name>
     <servlet-class>servlets.CancelServlet</servlet-class>
   </servlet>
@@ -40,10 +52,21 @@
     <servlet-name>statistics-servlet</servlet-name>
     <url-pattern>/statistics</url-pattern>
   </servlet-mapping>
-
   <servlet-mapping>
     <servlet-name>reservation-region-servlet</servlet-name>
     <url-pattern>/reserve-region</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-city-servlet</servlet-name>
+    <url-pattern>/reserve-city</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-district-servlet</servlet-name>
+    <url-pattern>/reserve-district</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-center-servlet</servlet-name>
+    <url-pattern>/reserve-center</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>cancel-servlet</servlet-name>

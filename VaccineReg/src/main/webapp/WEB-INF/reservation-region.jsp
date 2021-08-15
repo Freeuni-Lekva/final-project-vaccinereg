@@ -6,26 +6,23 @@
 
 <html>
     <head>
-        <title>Reservation</title>
+        <title>Reservation Region</title>
     </head>
     <body>
-        <h1>temporary reservation page</h1>
-        <form action="/reserve-region" method="post">
+        <h2>Step 1</h2>
+        <form action="/reserve-city" method="post">
             <table>
                 <tr>
                     <td>
-                        Region:
+                        Choose A Region:
                     </td>
                     <td>
                         <select name="region" id="reg">
-                            <option value="n">(default)</option>
                             <%  for(VaccineCenter center : centers){ %>
                             <option value=<%=center.getRegionName()%>><%= center.getRegionName()%></option>
                             <% } %>
                         </select>
                     </td>
-                </tr>
-                <tr>
                     <td>
                         <input type="submit" value="Choose">
                     </td>

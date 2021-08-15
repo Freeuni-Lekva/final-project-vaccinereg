@@ -140,6 +140,42 @@ public class VaccineCenterDAO {
         }
     }
 
+    public List<String> getCityByRegionName(String regionName){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT city_name FROM " + tableName + " WHERE region_name = ?;");
+            stmt.setString(1, regionName);
+            ResultSet res = stmt.executeQuery();
+
+            List<String> result = new ArrayList<>();
+            while (res.next()) {
+                result.add(res.getString(1));
+            }
+            con.close();
+            return result;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    public List<String> getDistrictByCityName(String cityName){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT district_name FROM " + tableName + " WHERE city_name = ?;");
+            stmt.setString(1, cityName);
+            ResultSet res = stmt.executeQuery();
+
+            List<String> result = new ArrayList<>();
+            while (res.next()) {
+                result.add(res.getString(1));
+            }
+            con.close();
+            return result;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
     public void deleteVaccineCenterById(Long id) {
         try {
             Connection con = ds.getConnection();

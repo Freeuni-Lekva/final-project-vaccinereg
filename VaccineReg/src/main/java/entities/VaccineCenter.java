@@ -46,7 +46,7 @@ public class VaccineCenter {
     }
 
     public String getCenterName() {
-        return cityName;
+        return centerName;
     }
     
     public Integer getPeopleLimitPerVaccineAtSameTime() {

@@ -5,6 +5,8 @@ import databaseconfigs.DB;
 import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UsersDAO {
@@ -66,6 +68,25 @@ public class UsersDAO {
         } catch (Exception ignored) {}
 
         return false;
+    }
+
+    public List<User> getEveryNonAdminUser(){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT * FROM " + tableName + " WHERE is_admin = false;");
+
+            ResultSet res = stmt.executeQuery();
+
+            List<User> result = new ArrayList<>();
+            while (res.next()) {
+                result.add(new User(res.getLong(1), res.getString(2), res.getString(3), res.getString(4) , res.getDate(5).toLocalDate() , res.getString(6) , res.getString(7) , res.getBoolean(8)));
+            }
+            con.close();
+            return result;
+        } catch (Exception ignored) {
+            return null;
+        }
     }
 
 

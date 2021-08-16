@@ -35,15 +35,15 @@
                 out.println(
                 "<p>" +
                     "You are already registered for a vaccine. " +
-                    "If you want to cancel your reservation, press the \"Cancel reservation\" button." +
+                    /*"If you want to cancel your reservation, press the \"Cancel reservation\" button." +*/
                 "</p>"
                 );
 
-                out.println(
+                /*out.println(
                 "<form action=\"/cancel\" method=\"post\">" +
                     "<input type=\"submit\" value=\"Cancel reservation\" />" +
                 "</form>"
-                );
+                );*/
             }
         %>
 
@@ -59,9 +59,13 @@
         %>
 
       
-    <form action="/statistics" method="get">
-        <input type="submit" value="statistics">
-    </form>
+        <form action="/statistics" method="get">
+            <input type="submit" value="statistics">
+        </form>
+
+        <form action = "/logout" method = "post">
+            <input type ="submit" value = "logout">
+        </form>
 
     </body>
 </html>

@@ -48,7 +48,6 @@
         %>
 
 
-        <!-- Admin button UNCOMMENT WHEN ADMIN FUNCTIONALITY IS ADDED
         <%
             if (user.getAdmin()){
                 out.println(
@@ -58,7 +57,6 @@
                 );
             }
         %>
-        -->
 
       
     <form action="/statistics" method="get">

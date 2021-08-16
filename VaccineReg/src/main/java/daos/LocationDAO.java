@@ -2,19 +2,21 @@ package daos;
 
 import com.mysql.cj.result.LocalDateTimeValueFactory;
 import databaseconfigs.DB;
-import entities.LocationVaccineAmount;
-import entities.VaccineCenter;
+import entities.*;
 import org.apache.commons.dbcp.BasicDataSource;
 import utils.Pair;
 import utils.Times;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class LocationDAO {
     private String tableName = "location_vaccine_amounts";
@@ -61,24 +63,28 @@ public class LocationDAO {
         }
     }
 
-    public List<Pair<String, Integer> >getVaccineAmountsForLocation(Long id){
-        List<Pair<String, Integer> > result = new ArrayList<Pair<String, Integer> >();
+
+    public LocationVaccineAmount getLocationVaccineAmount(long id) {
         try {
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "SELECT vaccine_name, amount " +
-                            "FROM location_vaccine_amounts l " +
-                            "WHERE (vaccine_center_id = \"" + id + "\") " );
+                    "SELECT * FROM " + tableName + " WHERE id = ?;");
+
+            stmt.setLong(1, id);
             ResultSet res = stmt.executeQuery();
-            while (res.next()) {
-                result.add(new Pair<>(res.getString(1), res.getInt(2)));
-            }
+            if (!res.next()) return null;
+            LocationVaccineAmount ans = new LocationVaccineAmount(
+                    res.getLong(1),
+                    res.getLong(2),
+                    res.getString(3),
+                    res.getInt(4));
             con.close();
-            return result;
+            return ans;
         } catch (Exception ignored) {
             return null;
         }
     }
+
 
     // NEEDS TO BE FIXED
     public List<String> getAvailableTimes(String vaccineName, Long id, String date){
@@ -160,3 +166,39 @@ public class LocationDAO {
 
 
 }
+
+    public void setVaccineAmount(long id, int amount) {
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "UPDATE " + tableName + " SET amount = ? WHERE id = ?;");
+
+            stmt.setInt(1, amount);
+            stmt.setLong(2, id);
+
+            stmt.execute();
+            con.close();
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    public void setVaccineAmount(LocationVaccineAmount v, int amount) {
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "UPDATE " + tableName + " SET amount = ? WHERE id = ?;");
+
+            stmt.setInt(1, amount);
+            stmt.setLong(2, v.getId());
+            stmt.execute();
+            con.close();
+            v.setAmount(amount);
+        } catch (Exception ignored) {
+
+        }
+    }
+
+
+}
+

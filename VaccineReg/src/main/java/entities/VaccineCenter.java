@@ -8,21 +8,25 @@ public class VaccineCenter {
     private Integer peopleLimitPerVaccineAtSameTime;
     private String centerName;
 
-    public VaccineCenter(Long id, String regionName, String cityName, String districtName , String centerName, Integer peopleLimitPerVaccineAtSameTime) {
+  
+    public VaccineCenter(Long id, String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime , String centerName) {
         this.id = id;
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
         this.centerName = centerName;
         this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
+        this.centerName = centerName;
     }
 
-    public VaccineCenter(String regionName, String cityName, String districtName , String centerName, Integer peopleLimitPerVaccineAtSameTime) {
+
+    public VaccineCenter(String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime , String centerName) {
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
         this.centerName = centerName;
         this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
+        this.centerName = centerName;
     }
 
     public VaccineCenter() {
@@ -45,12 +49,12 @@ public class VaccineCenter {
         return districtName;
     }
 
-    public String getCenterName() {
-        return centerName;
-    }
-    
     public Integer getPeopleLimitPerVaccineAtSameTime() {
         return peopleLimitPerVaccineAtSameTime;
+    }
+
+    public String getCenterName() {
+        return centerName;
     }
 
     public void setId(Long id) {
@@ -69,12 +73,12 @@ public class VaccineCenter {
         this.districtName = districtName;
     }
 
-    public void setCenterName(String centerName) {
-        this.centerName = centerName;
-    }
-    
     public void setPeopleLimitPerVaccineAtSameTime(Integer peopleLimitPerVaccineAtSameTime) {
         this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
+    }
+
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
     }
 
     @Override
@@ -83,6 +87,6 @@ public class VaccineCenter {
         if (!(o instanceof User)) return false;
 
         VaccineCenter v = (VaccineCenter) o;
-        return (this.id.equals(v.getId()) && this.regionName.equals(v.getRegionName()) && this.cityName.equals(v.getCityName()) && this.districtName.equals(v.getDistrictName()) && this.peopleLimitPerVaccineAtSameTime.equals(v.getPeopleLimitPerVaccineAtSameTime()));
+        return (this.id.equals(v.getId()) && this.regionName.equals(v.getRegionName()) && this.cityName.equals(v.getCityName()) && this.districtName.equals(v.getDistrictName()) && this.peopleLimitPerVaccineAtSameTime.equals(v.getPeopleLimitPerVaccineAtSameTime()) && this.centerName.equals(v.getCenterName()));
     }
 }

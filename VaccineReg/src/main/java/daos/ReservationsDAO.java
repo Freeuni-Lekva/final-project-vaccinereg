@@ -6,10 +6,7 @@ import entities.User;
 import org.apache.commons.dbcp.BasicDataSource;
 import utils.Pair;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Types;
+import java.sql.*;
 
 public class ReservationsDAO {
     private String reservationsTableName = "reservations";
@@ -452,6 +449,19 @@ public class ReservationsDAO {
             return ans;
 
         } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    public Reservation getReservationByUserId(Long userId) throws SQLException {
+        Connection con = ds.getConnection();
+        PreparedStatement stmt = con.prepareStatement(
+                "SELECT * FROM " + reservationsTableName + " WHERE user_id = ?;");
+        stmt.setLong(1 , userId);
+        ResultSet res = stmt.executeQuery();
+        if(res.next()) {
+            return new Reservation(res.getLong("id"), res.getTimestamp("reservation_time").toLocalDateTime(), res.getTimestamp("vaccination_time").toLocalDateTime(), res.getLong("location_vaccine_amount_id"), res.getLong("user_id"));
+        }else{
             return null;
         }
     }

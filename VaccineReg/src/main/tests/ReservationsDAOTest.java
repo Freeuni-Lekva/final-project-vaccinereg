@@ -63,10 +63,11 @@ public class ReservationsDAOTest extends TestCase {
 
     public void createTestTableCenters(Connection con) throws SQLException {
         PreparedStatement stmt = con.prepareStatement("CREATE TABLE " + testTableCenters + " (" +
-                "id 	        BIGINT 		PRIMARY KEY, \n" +
+                "id 	        BIGINT 		PRIMARY KEY AUTO_INCREMENT, \n" +
                 "region_name 	CHAR(64) 	NOT NULL, \n" +
                 "city_name 		CHAR(64) 	NOT NULL, \n" +
                 "district_name 	CHAR(64)	NOT NULL, \n" +
+                "center_name CHAR(64) NOT NULL, \n " +
                 "people_limit 	INT 		\n" +
                 ");");
         stmt.execute();
@@ -90,7 +91,7 @@ public class ReservationsDAOTest extends TestCase {
 
     public void createTestTableAmounts(Connection con) throws SQLException {
         PreparedStatement stmt = con.prepareStatement("CREATE TABLE " + testTableAmounts + " (" +
-                "id 	            BIGINT 		PRIMARY KEY, \n" +
+                "id 	            BIGINT 		PRIMARY KEY AUTO_INCREMENT, \n" +
                 "vaccine_center_id 	BIGINT 	    NOT NULL, \n" +
                 "vaccine_name 		CHAR(64) 	NOT NULL, \n" +
                 "amount 	        INT, 		\n" +
@@ -102,7 +103,7 @@ public class ReservationsDAOTest extends TestCase {
 
     public void createTestTableReservations(Connection con) throws SQLException {
         PreparedStatement stmt = con.prepareStatement("CREATE TABLE " + testTableReservations + " (" +
-                "id 	                    BIGINT 		PRIMARY KEY, \n" +
+                "id 	                    BIGINT 		PRIMARY KEY AUTO_INCREMENT, \n" +
                 "reservation_time 	        DATETIME 	NOT NULL, \n" +
                 "vaccination_time 	        DATETIME 	NOT NULL, \n" +
                 "location_vaccine_amount_id BIGINT, 		\n" +
@@ -117,9 +118,9 @@ public class ReservationsDAOTest extends TestCase {
 
     public void addCenters() {
         VaccineCenterDAO dao = new VaccineCenterDAO(testTableCenters);
-        dao.addVaccineCenter(new VaccineCenter(1L, "Tbilisi", "Tbilisi", "Saburtalo", 400));
-        dao.addVaccineCenter(new VaccineCenter(2L, "Batumi", "Adjara", "idk", 350));
-        dao.addVaccineCenter(new VaccineCenter(3L, "Kutaisi", "Imereti", "idk2", 300));
+        dao.addVaccineCenter(new VaccineCenter(1L, "Tbilisi", "Tbilisi", "Saburtalo", 400, "place"));
+        dao.addVaccineCenter(new VaccineCenter(2L, "Batumi", "Adjara", "idk", 350, "place1"));
+        dao.addVaccineCenter(new VaccineCenter(3L, "Kutaisi", "Imereti", "idk2", 300, "place2"));
     }
 
     public void addUsers() {

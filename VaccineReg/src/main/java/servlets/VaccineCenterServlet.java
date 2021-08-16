@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet("/vaccine-center")
 public class VaccineCenterServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         HttpSession session = httpServletRequest.getSession();
         if(session.getAttribute("user") != null){
             User loggedInUser = (User) session.getAttribute("user");

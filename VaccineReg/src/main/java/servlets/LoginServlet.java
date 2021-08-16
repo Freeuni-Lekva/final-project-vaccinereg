@@ -44,11 +44,7 @@ public class LoginServlet extends HttpServlet {
         else{
             if ( user.getPassword().equals(password) ){
                 req.getSession().setAttribute("user", user);
-                if(!user.getAdmin()) {
-                    req.getRequestDispatcher("WEB-INF/userpage.jsp").forward(req, resp);
-                }else{
-                    req.getRequestDispatcher("WEB-INF/adminpage.jsp").forward(req , resp);
-                }
+                req.getRequestDispatcher("WEB-INF/userpage.jsp").forward(req, resp);
             }
             else{
                 req.setAttribute("email_typed", email);

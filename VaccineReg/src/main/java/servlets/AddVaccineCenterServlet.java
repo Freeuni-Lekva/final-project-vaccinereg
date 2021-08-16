@@ -30,11 +30,7 @@ public class AddVaccineCenterServlet extends HttpServlet {
                 vaccineCenter.setPeopleLimitPerVaccineAtSameTime(Integer.parseInt(httpServletRequest.getParameter("limit")));
                 vaccineCenter.setCenterName(httpServletRequest.getParameter("center-name"));
 
-                try {
-                    dao.addVaccineCenter(vaccineCenter);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                dao.addVaccineCenter(vaccineCenter);
 
                 httpServletRequest.setAttribute("vaccineCenters" , dao.getAllVaccineCenters());
                 httpServletRequest.getRequestDispatcher("/WEB-INF/vaccine-centers.jsp").forward(httpServletRequest, httpServletResponse);

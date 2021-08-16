@@ -23,12 +23,14 @@
 <br>
 
 <form action = "/add-vaccine-center" method="post">
-    Region Name: <input type = "text" name = "region-name" required>
-    City Name: <input type = "text" name = "city-name" required>
-    District Name: <input type = "text" name = "district-name" required>
-    People limit per vaccine: <input type = "text" name = "limit" required>
-    Center name: <input type = "text" name = "center-name" required>
-    <input type = "submit" value = "add">
+    <table>
+    <tr><td>Region Name: </td><td><input type = "text" name = "region-name" required></td></tr>
+    <tr><td>City Name: </td><td><input type = "text" name = "city-name" required></td></tr>
+    <tr><td>District Name: </td><td><input type = "text" name = "district-name" required></td></tr>
+    <tr><td>People limit per vaccine: </td><td><input type = "text" name = "limit" required></td></tr>
+    <tr><td>Center name: </td><td><input type = "text" name = "center-name" required></td></tr>
+    <td><input type = "submit" value = "add"></td></tr>
+    </table>
 </form>
 
 <form action = "/login" method="get">

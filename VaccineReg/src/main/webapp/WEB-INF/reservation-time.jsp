@@ -4,12 +4,15 @@
 <%@ page import="databaseconfigs.DB" %>
 <%@ page import="utils.Pair" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalDateTime" %>
 
 <% String reg = (String) request.getServletContext().getAttribute("region");%>
 <% String city = (String) request.getServletContext().getAttribute("city");%>
 <% String dis = (String) request.getServletContext().getAttribute("district");%>
 <% String cen = (String) request.getServletContext().getAttribute("center");%>
 <% String vacAmount = (String) request.getServletContext().getAttribute("vacAmount");%>
+<% String date = (String) request.getServletContext().getAttribute("date");%>
+<% List<LocalDateTime> dateTimes = (List<LocalDateTime>) request.getServletContext().getAttribute("dateTimes"); %>
 <html>
 <head>
     <title>Reservation</title>
@@ -86,10 +89,27 @@
         </tr>
         <tr>
             <td>
-                Choose A Date:
+                Date:
             </td>
             <td>
-                <input type="date" name="date" min="<%= LocalDate.now().plusDays(1)%>" placeholder="<%= LocalDate.now().plusDays(1)%>">
+                <select name="date" id="date">
+                    <option value="<%=date %>"><%=date %></option>
+                </select>
+
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Time:
+            </td>
+            <td>
+                <select name="city" id="cit">
+                    <%  for(LocalDateTime time : dateTimes){ %>
+                    <option value=<%=time.toString()%>><%= time.toString()%></option>
+                    <% } %>
+                </select>
             </td>
             <td>
                 <input type="submit" value="Choose">

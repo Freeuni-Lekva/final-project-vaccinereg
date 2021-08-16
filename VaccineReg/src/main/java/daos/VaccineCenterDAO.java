@@ -36,17 +36,23 @@ public class VaccineCenterDAO {
         } catch (Exception ignored) {}
     }
 
-    public void addVaccineCenter(VaccineCenter vaccineCenter) throws SQLException {
+    public void addVaccineCenter(VaccineCenter vaccineCenter){
 
-        Connection con = ds.getConnection();
-        PreparedStatement stmt = con.prepareStatement("INSERT INTO " + tableName + " (region_name, city_name, district_name, people_limit, center_name)" + " VALUES (?, ?, ?, ?, ?);");
-        stmt.setString(1, vaccineCenter.getRegionName());
-        stmt.setString(2, vaccineCenter.getCityName());
-        stmt.setString(3, vaccineCenter.getDistrictName());
-        stmt.setInt(4, vaccineCenter.getPeopleLimitPerVaccineAtSameTime());
-        stmt.setString(5 , vaccineCenter.getCenterName());
-        stmt.execute();
-        con.close();
+        Connection con = null;
+        try {
+            con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO " + tableName + " (region_name, city_name, district_name, people_limit, center_name)" + " VALUES (?, ?, ?, ?, ?);");
+            stmt.setString(1, vaccineCenter.getRegionName());
+            stmt.setString(2, vaccineCenter.getCityName());
+            stmt.setString(3, vaccineCenter.getDistrictName());
+            stmt.setInt(4, vaccineCenter.getPeopleLimitPerVaccineAtSameTime());
+            stmt.setString(5 , vaccineCenter.getCenterName());
+            stmt.execute();
+            con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
 
     }
 

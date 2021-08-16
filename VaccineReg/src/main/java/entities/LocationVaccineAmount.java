@@ -58,7 +58,7 @@ public class LocationVaccineAmount {
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (!(o instanceof LocationVaccineAmount)) return false;
 
         LocationVaccineAmount l = (LocationVaccineAmount) o;
         return (this.id.equals(l.getId()) && this.vaccineCenterId.equals(l.getVaccineCenterId()) && this.vaccineName.equals(l.getVaccineName()) && this.amount.equals(l.getAmount()));

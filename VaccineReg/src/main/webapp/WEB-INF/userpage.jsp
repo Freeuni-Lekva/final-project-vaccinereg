@@ -11,7 +11,6 @@
     </head>
     <body>
 
-        <h1>Welcome <%= request.getAttribute("privatenum") %></h1>
         
         <h1>Welcome <%= user.getName() %> <%= user.getLastName() %>! </h1>
 

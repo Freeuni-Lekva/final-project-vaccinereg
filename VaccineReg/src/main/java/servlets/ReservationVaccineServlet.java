@@ -25,7 +25,7 @@ public class ReservationVaccineServlet extends HttpServlet {
         req.getServletContext().setAttribute("district", district);
         String center = req.getParameter("center");
         req.getServletContext().setAttribute("center", center);
-        List<Pair<String, Integer> > vacAmounts = locationDAO.getVaccineAmountsForLocation(vaccineCenterDAO.getIdByCenterName(center));
+        List<Pair<String, Integer> > vacAmounts = locationDAO.getVaccineAmountsListForLocation(vaccineCenterDAO.getIdByCenterName(center));
         req.getServletContext().setAttribute("vacAmounts", vacAmounts);
         req.getRequestDispatcher("WEB-INF/reservation-vaccine.jsp").forward(req, resp);
     }

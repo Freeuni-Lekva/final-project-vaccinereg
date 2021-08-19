@@ -13,6 +13,7 @@
 <% String vacAmount = (String) request.getServletContext().getAttribute("vacAmount");%>
 <% String date = (String) request.getServletContext().getAttribute("date");%>
 <% List<String> times = (List<String>) request.getServletContext().getAttribute("time"); %>
+<% String errorMessage = (String) request.getServletContext().getAttribute("errorMessage"); %>
 
 
 <html>
@@ -85,6 +86,7 @@
                     <option value="<%=vacAmount %>"><%=vacAmount %></option>
                 </select>
 
+
             </td>
 
         </tr>
@@ -114,6 +116,12 @@
             </td>
             <td>
                 <input type="submit" value="Choose">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <% if(errorMessage == null) errorMessage = "" ;%>
+                <%= errorMessage %>
             </td>
         </tr>
     </table>

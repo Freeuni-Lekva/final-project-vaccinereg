@@ -54,6 +54,10 @@
     <servlet-name>cancel-servlet</servlet-name>
     <servlet-class>servlets.CancelServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>complete-cancel-servlet</servlet-name>
+    <servlet-class>servlets.CompleteCancellationServlet</servlet-class>
+  </servlet>
 
 
   <servlet-mapping>
@@ -103,6 +107,10 @@
   <servlet-mapping>
     <servlet-name>cancel-servlet</servlet-name>
     <url-pattern>/cancel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>complete-cancel-servlet</servlet-name>
+    <url-pattern>/complete-cancel</url-pattern>
   </servlet-mapping>
 
 

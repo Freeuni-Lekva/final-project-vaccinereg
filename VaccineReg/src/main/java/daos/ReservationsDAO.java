@@ -503,14 +503,30 @@ public class ReservationsDAO {
             stmt.setLong(1, userId);
             ResultSet res = stmt.executeQuery();
             if (res.next()) {
-                return res.getInt(1);
+
+                int result = res.getInt(1);
+                con.close();
+                return result;
             } else {
+                con.close();
                 return 0;
             }
         } catch (Exception ignored) {
-
             return 0;
         }
 
+    }
+
+    public void deleteReservation(Long id){
+        try{
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "DELETE  FROM " + reservationsTableName + " WHERE id = ?;");
+            stmt.setLong(1, id);
+            stmt.executeQuery();
+            con.close();
+        } catch(Exception ignored){
+
+        }
     }
 }

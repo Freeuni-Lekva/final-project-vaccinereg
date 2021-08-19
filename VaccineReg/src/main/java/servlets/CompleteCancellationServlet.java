@@ -1,5 +1,6 @@
 package servlets;
 
+
 import daos.LocationDAO;
 import daos.ReservationsDAO;
 import daos.VaccineCenterDAO;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CancelServlet extends HttpServlet {
+public class CompleteCancellationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ReservationsDAO reservationDAO = (ReservationsDAO) req.getServletContext().getAttribute("reservationsDAO");
@@ -22,14 +23,8 @@ public class CancelServlet extends HttpServlet {
         LocationDAO locationDAO = (LocationDAO) req.getServletContext().getAttribute("locationDAO");
         User user = (User) req.getSession().getAttribute("user");
         Reservation reservation = reservationDAO.getNextVaccination(user);
-        req.getServletContext().setAttribute("time", reservation.getVaccinationTime());
-        LocationVaccineAmount lva = locationDAO.getLocationVaccineAmount(reservation.getLocation_vaccine_amount_id());
-        req.getServletContext().setAttribute("vaccine", lva.getVaccineName());
-        VaccineCenter vc = vaccineCenterDAO.getVaccineCenterById(lva.getVaccineCenterId());
-        String center = vc.getCenterName() + ", " + vc.getDistrictName() +
-                ", " + vc.getCityName() + ", " + vc.getRegionName();
-        req.getServletContext().setAttribute("center", center);
+        reservationDAO.deleteReservation(reservation.getId());
 
-        req.getRequestDispatcher("/WEB-INF/cancel-reservation.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/userpage.jsp").forward(req, resp);
     }
 }

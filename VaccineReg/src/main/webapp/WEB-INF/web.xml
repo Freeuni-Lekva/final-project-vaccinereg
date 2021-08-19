@@ -19,8 +19,36 @@
   </servlet>
 
   <servlet>
-    <servlet-name>reservation-servlet</servlet-name>
-    <servlet-class>servlets.ReservationServlet</servlet-class>
+    <servlet-name>reservation-region-servlet</servlet-name>
+    <servlet-class>servlets.ReservationRegionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-city-servlet</servlet-name>
+    <servlet-class>servlets.ReservationCityServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-district-servlet</servlet-name>
+    <servlet-class>servlets.ReservationDistrictServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-center-servlet</servlet-name>
+    <servlet-class>servlets.ReservationCenterServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-vaccine-servlet</servlet-name>
+    <servlet-class>servlets.ReservationVaccineServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-date-servlet</servlet-name>
+    <servlet-class>servlets.ReservationDateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-time-servlet</servlet-name>
+    <servlet-class>servlets.ReservationTimeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reservation-check-servlet</servlet-name>
+    <servlet-class>servlets.ReservationCheckServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>cancel-servlet</servlet-name>
@@ -40,10 +68,37 @@
     <servlet-name>statistics-servlet</servlet-name>
     <url-pattern>/statistics</url-pattern>
   </servlet-mapping>
-
   <servlet-mapping>
-    <servlet-name>reservation-servlet</servlet-name>
-    <url-pattern>/reserve</url-pattern>
+    <servlet-name>reservation-region-servlet</servlet-name>
+    <url-pattern>/reserve-region</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-city-servlet</servlet-name>
+    <url-pattern>/reserve-city</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-district-servlet</servlet-name>
+    <url-pattern>/reserve-district</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-center-servlet</servlet-name>
+    <url-pattern>/reserve-center</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-vaccine-servlet</servlet-name>
+    <url-pattern>/reserve-vaccine</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-date-servlet</servlet-name>
+    <url-pattern>/reserve-date</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-time-servlet</servlet-name>
+    <url-pattern>/reserve-time</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-check-servlet</servlet-name>
+    <url-pattern>/reserve-check</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>cancel-servlet</servlet-name>

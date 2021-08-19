@@ -11,7 +11,6 @@
     </head>
     <body>
 
-        <h1>Welcome <%= request.getAttribute("privatenum") %></h1>
         
         <h1>Welcome <%= user.getName() %> <%= user.getLastName() %>! </h1>
 
@@ -26,7 +25,7 @@
                 );
 
                 out.println(
-                "<form action=\"/reserve\" method=\"post\">" +
+                "<form action=\"/reserve-region\" method=\"post\">" +
                     "<input type=\"submit\" value=\"Register for a vaccine\" />" +
                 "</form>"
                 );

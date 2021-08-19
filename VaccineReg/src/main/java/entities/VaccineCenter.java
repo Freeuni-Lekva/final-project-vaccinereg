@@ -8,19 +8,23 @@ public class VaccineCenter {
     private Integer peopleLimitPerVaccineAtSameTime;
     private String centerName;
 
+  
     public VaccineCenter(Long id, String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime , String centerName) {
         this.id = id;
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
+        this.centerName = centerName;
         this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
         this.centerName = centerName;
     }
+
 
     public VaccineCenter(String regionName, String cityName, String districtName , Integer peopleLimitPerVaccineAtSameTime , String centerName) {
         this.regionName = regionName;
         this.cityName = cityName;
         this.districtName = districtName;
+        this.centerName = centerName;
         this.peopleLimitPerVaccineAtSameTime = peopleLimitPerVaccineAtSameTime;
         this.centerName = centerName;
     }

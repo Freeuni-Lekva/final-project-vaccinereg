@@ -72,6 +72,33 @@ public class ReservationsDAO {
         return false;
     }
 
+    public boolean addReservationNoId(Reservation reservation){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "INSERT INTO " + reservationsTableName +
+                            " (reservation_time, vaccination_time,location_vaccine_amount_id, user_id) " +
+                            " VALUES ( ?, ?, ?, ?);");
+            stmt.setTimestamp(1, java.sql.Timestamp.valueOf(reservation.getReservationTime()));
+            stmt.setTimestamp(2, java.sql.Timestamp.valueOf(reservation.getVaccinationTime()));
+            stmt.setLong(3, reservation.getLocation_vaccine_amount_id());
+            if (reservation.getUser_id() != null){
+                stmt.setLong(4, reservation.getUser_id());
+            } else{
+                stmt.setNull(4 , Types.NULL);
+            }
+
+            stmt.execute();
+            con.close();
+
+            return true;
+        } catch (Exception ignored) {
+        }
+
+        return false;
+    }
+
+
     /**
      * Returns the count of every reservation during the last specified seconds
      * @param seconds
@@ -464,5 +491,26 @@ public class ReservationsDAO {
         }else{
             return null;
         }
+    }
+
+    public int getReservationsCountByUserId(Long userId) {
+
+
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT COUNT(*) FROM " + reservationsTableName + " WHERE user_id = ?;");
+            stmt.setLong(1, userId);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                return res.getInt(1);
+            } else {
+                return 0;
+            }
+        } catch (Exception ignored) {
+
+            return 0;
+        }
+
     }
 }

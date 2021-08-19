@@ -1,13 +1,22 @@
 package daos;
 
+import com.mysql.cj.result.LocalDateTimeValueFactory;
 import databaseconfigs.DB;
-import entities.LocationVaccineAmount;
-import entities.User;
+import entities.*;
 import org.apache.commons.dbcp.BasicDataSource;
+import utils.Pair;
+import utils.Times;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class LocationDAO {
     private String tableName = "location_vaccine_amounts";
@@ -54,6 +63,7 @@ public class LocationDAO {
         }
     }
 
+
     public LocationVaccineAmount getLocationVaccineAmount(long id) {
         try {
             Connection con = ds.getConnection();
@@ -74,6 +84,145 @@ public class LocationDAO {
             return null;
         }
     }
+
+    public List<Pair<String, Integer> >getVaccineAmountsListForLocation(Long id){
+        List<Pair<String, Integer> > result = new ArrayList<Pair<String, Integer> >();
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT vaccine_name, amount " +
+                            "FROM location_vaccine_amounts l " +
+                            "WHERE (vaccine_center_id = \"" + id + "\") " );
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                result.add(new Pair<>(res.getString(1), res.getInt(2)));
+            }
+            con.close();
+            return result;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+
+    /** This part had to be taken out because an issue with intellij, for some reason it refuses
+     * to do more than 7 iterations of checking if the time is available.
+
+     public List<String> getAvailableTimes(String vaccineName, Long id, String date, String centerName){
+
+     try {
+     Connection con = ds.getConnection();
+     List<String> generatedTimes = Times.generate();
+
+     List<String> allTimes = new ArrayList<>();
+     for(String s : generatedTimes){
+     allTimes.add(date + " " + s);
+
+     }
+     List<String> availableTimes = new ArrayList<>();
+     for(String s : allTimes){
+     PreparedStatement stmt = con.prepareStatement(
+     "SELECT  people_limit_per_vaccine_at_same_time " +
+     "FROM vaccine_centers v " +
+     "WHERE (v.center_name = \"" + centerName +"\") ;" );
+
+     ResultSet res = stmt.executeQuery();
+     int limit;
+     if(res.next()){
+     limit = res.getInt(1);
+     } else limit = 0;
+
+     PreparedStatement stmt1 = con.prepareStatement(
+     "SELECT Count(*) " +
+     "FROM reservations " +
+     "WHERE (location_vaccine_amount_id = \"" + id + "\") " +
+     "AND (vaccination_time = \"" + s + "\") ;" );
+
+
+     ResultSet res1 = stmt1.executeQuery();
+
+     int reserves;
+     if(res1.next()){
+     reserves = res1.getInt(1);
+     } else reserves = 0;
+
+     if(limit > reserves) availableTimes.add(s);
+     }
+     con.close();
+     return availableTimes;
+     } catch (Exception ignored) {
+     return null;
+     }
+
+     }
+     */
+    public boolean checkAvailibility(String vaccineName, Long id, String date, String time, String centerName){
+        try {
+            Connection con = ds.getConnection();
+            String dateTime = date + " " + time;
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT  people_limit " +
+                            "FROM vaccine_centers v " +
+                            "WHERE (v.center_name = \"" + centerName +"\") ;" );
+
+            ResultSet res = stmt.executeQuery();
+            int limit;
+            if(res.next()){
+                limit = res.getInt(1);
+            } else limit = 0;
+
+            PreparedStatement stmt1 = con.prepareStatement(
+                    "SELECT Count(*) " +
+                            "FROM reservations " +
+                            "WHERE (location_vaccine_amount_id = \"" + id + "\") " +
+                            "AND (vaccination_time = \"" + dateTime + "\") ;" );
+
+
+            ResultSet res1 = stmt1.executeQuery();
+
+            int reserves;
+            if(res1.next()){
+                reserves = res1.getInt(1);
+            } else reserves = 0;
+
+            if(limit > reserves) return true;
+            return false;
+        } catch (Exception ignored){
+            return false;
+        }
+    }
+
+
+
+    public Long getIdByVaccineAndCenter(Long center_id, String vaccine){
+
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT id " +
+                            "FROM location_vaccine_amounts  " +
+                            "WHERE (vaccine_center_id = \"" + center_id + "\")" +
+                            "AND (vaccine_name = \"" + vaccine +"\") " );
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+
+                Long result = new Long(res.getLong(1));
+                con.close();
+
+                return result;
+            }
+            con.close();
+
+            return null;
+        } catch (Exception ignored) {
+
+            return null;
+        }
+
+    }
+
 
     public void setVaccineAmount(long id, int amount) {
         try {
@@ -109,3 +258,4 @@ public class LocationDAO {
 
 
 }
+

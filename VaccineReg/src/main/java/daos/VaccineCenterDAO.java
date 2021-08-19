@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class VaccineCenterDAO {
     private String tableName = "vaccine_centers";
@@ -90,6 +92,27 @@ public class VaccineCenterDAO {
         }
     }
 
+    public List<String> getAllRegions() {
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT region_name FROM " + tableName + " ;");
+            ResultSet res = stmt.executeQuery();
+
+            List<String> result = new ArrayList<>();
+            Set<String> set = new HashSet<>();
+            while (res.next()) {
+                set.add(res.getString(1));
+            }
+            for(String s : set){
+                result.add(s);
+            }
+            con.close();
+            return result;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
     public List<VaccineCenter> getVaccineCenterByRegionName(String regionName) {
         try {
             Connection con = ds.getConnection();
@@ -139,6 +162,68 @@ public class VaccineCenterDAO {
             }
             con.close();
             return result;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    public List<String> getCityByRegionName(String regionName){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT city_name FROM " + tableName + " WHERE region_name = ?;");
+            stmt.setString(1, regionName);
+            ResultSet res = stmt.executeQuery();
+            List<String> result = new ArrayList<>();
+            Set<String> names = new HashSet<>();
+            while (res.next()) {
+                names.add(res.getString(1));
+            }
+            for(String s: names){
+                result.add(s);
+            }
+            con.close();
+            return result;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+  
+    public List<String> getDistrictByCityName(String cityName){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT district_name FROM " + tableName + " WHERE city_name = ?;");
+            stmt.setString(1, cityName);
+            ResultSet res = stmt.executeQuery();
+
+            List<String> result = new ArrayList<>();
+            Set<String> names = new HashSet<>();
+            while (res.next()) {
+                names.add(res.getString(1));
+            }
+            for(String s: names){
+                result.add(s);
+            }
+            con.close();
+            return result;
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    public Long getIdByCenterName(String centerName){
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT id FROM " + tableName + " WHERE center_name = ?;");
+            stmt.setString(1, centerName);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                Long result = new Long(res.getLong(1));
+                con.close();
+                return result;
+            }
+            con.close();
+            return null;
         } catch (Exception ignored) {
             return null;
         }
@@ -197,3 +282,4 @@ public class VaccineCenterDAO {
 
 
 }
+

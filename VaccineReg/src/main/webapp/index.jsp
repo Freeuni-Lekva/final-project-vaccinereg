@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2> Welcome to VaccineReg</h2>
 </body>
 
 <form action = "/register" method = "get">

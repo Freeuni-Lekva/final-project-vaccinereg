@@ -24,7 +24,8 @@ public class CompleteCancellationServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("user");
         Reservation reservation = reservationDAO.getNextVaccination(user);
         reservationDAO.deleteReservation(reservation.getId());
-
+        int amount = locationDAO.getLocationVaccineAmount(reservation.getLocation_vaccine_amount_id()).getAmount();
+        locationDAO.setVaccineAmount(reservation.getLocation_vaccine_amount_id(), amount--);
         req.getRequestDispatcher("/WEB-INF/userpage.jsp").forward(req, resp);
     }
 }

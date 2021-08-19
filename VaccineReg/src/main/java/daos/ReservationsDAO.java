@@ -521,9 +521,9 @@ public class ReservationsDAO {
         try{
             Connection con = ds.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "DELETE  FROM " + reservationsTableName + " WHERE id = ?;");
+                    "DELETE FROM " + reservationsTableName + " WHERE id = ?;");
             stmt.setLong(1, id);
-            stmt.executeQuery();
+            stmt.execute();
             con.close();
         } catch(Exception ignored){
 

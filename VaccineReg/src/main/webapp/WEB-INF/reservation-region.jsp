@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="daos.VaccineCenterDAO" %>
 
-<% List<VaccineCenter> centers = (List<VaccineCenter>) request.getServletContext().getAttribute("centers");%>
+<% List<String> regions = (List<String>) request.getServletContext().getAttribute("regions");%>
 
 <html>
     <head>
@@ -18,8 +18,8 @@
                     </td>
                     <td>
                         <select name="region" id="reg">
-                            <%  for(VaccineCenter center : centers){ %>
-                            <option value=<%=center.getRegionName()%>><%= center.getRegionName()%></option>
+                            <%  for(String s : regions){ %>
+                            <option value=<%=s%>><%= s%></option>
                             <% } %>
                         </select>
                     </td>

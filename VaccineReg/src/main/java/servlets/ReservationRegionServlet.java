@@ -16,8 +16,8 @@ public class ReservationRegionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         VaccineCenterDAO vaccineCenterDAO = (VaccineCenterDAO) req.getServletContext().getAttribute("vaccineCenterDAO");
-        List<VaccineCenter> centers = vaccineCenterDAO.getAllVaccineCenters();
-        req.getServletContext().setAttribute("centers", centers);
+        List<String> regions = vaccineCenterDAO.getAllRegions();
+        req.getServletContext().setAttribute("regions", regions);
         req.getRequestDispatcher("WEB-INF/reservation-region.jsp").forward(req, resp);
     }
 

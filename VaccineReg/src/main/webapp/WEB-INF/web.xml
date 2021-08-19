@@ -47,6 +47,10 @@
     <servlet-class>servlets.ReservationTimeServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>reservation-check-servlet</servlet-name>
+    <servlet-class>servlets.ReservationCheckServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>cancel-servlet</servlet-name>
     <servlet-class>servlets.CancelServlet</servlet-class>
   </servlet>
@@ -91,6 +95,10 @@
   <servlet-mapping>
     <servlet-name>reservation-time-servlet</servlet-name>
     <url-pattern>/reserve-time</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reservation-check-servlet</servlet-name>
+    <url-pattern>/reserve-check</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>cancel-servlet</servlet-name>

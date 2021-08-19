@@ -4,6 +4,7 @@ import daos.LocationDAO;
 import daos.VaccineCenterDAO;
 import entities.VaccineCenter;
 import utils.Pair;
+import utils.Times;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationTimeServlet extends HttpServlet {
@@ -30,8 +32,18 @@ public class ReservationTimeServlet extends HttpServlet {
         req.getServletContext().setAttribute("vacAmount", vacAmount);
         String date = req.getParameter("date");
         req.getServletContext().setAttribute("date", date);
-        List<String> dateTimes = locationDAO.getAvailableTimes(vacAmount,locationDAO.getIdByVaccineAndCenter( vaccineCenterDAO.getIdByCenterName(center), vacAmount), date);
-        req.getServletContext().setAttribute("dateTimes", dateTimes);
+        /** This part had to be changed because of the intellij issue
+
+         List<String> dateTimes = locationDAO.getAvailableTimes(vacAmount,locationDAO.getIdByVaccineAndCenter( vaccineCenterDAO.getIdByCenterName(center), vacAmount), date, center);
+         req.getServletContext().setAttribute("dateTimes", dateTimes);
+         */
+        List<String> times = utils.Times.generate();
+        /**
+         List<String> dateTimes = new ArrayList<>();
+         for(String s : times){
+         dateTimes.add(date + " " + s);
+         }*/
+        req.getServletContext().setAttribute("time", times);
         req.getRequestDispatcher("WEB-INF/reservation-time.jsp").forward(req, resp);
     }
 }

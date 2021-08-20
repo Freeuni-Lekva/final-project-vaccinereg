@@ -32,8 +32,8 @@ public class SeeUsersServlet extends HttpServlet {
                 for(User u : everyNonUser){
                     try {
                         reservations.add(dao2.getReservationByUserId(u.getPrivateNum()));
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
+                    } catch (Exception ignored) {
+
                     }
                 }
                 List<Pair<User , Reservation>> finalResult = new ArrayList<>();

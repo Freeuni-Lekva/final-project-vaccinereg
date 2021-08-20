@@ -1,11 +1,18 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "entities.User" %>
 <%@ page import = "daos.ReservationsDAO" %>
+<%@ page import="daos.LocationDAO" %>
+<%@ page import="entities.VaccineCenter" %>
+<%@ page import="daos.VaccineCenterDAO" %>
+<%@ page import="entities.Reservation" %>
+<%@ page import="entities.LocationVaccineAmount" %>
 
 <html>
     <head>
         <%  User user = (User) request.getSession().getAttribute("user");
-            ReservationsDAO resDAO = (ReservationsDAO) request.getServletContext().getAttribute("reservationsDAO"); %>
+            ReservationsDAO resDAO = (ReservationsDAO) request.getServletContext().getAttribute("reservationsDAO");
+            LocationDAO locationDAO = (LocationDAO) request.getServletContext().getAttribute("locationDAO");
+            VaccineCenterDAO vaccineCenterDAO = (VaccineCenterDAO) request.getServletContext().getAttribute("vaccineCenterDAO");%>
 
         <title>Welcome</title>
     </head>
@@ -31,11 +38,24 @@
                 );
             }
             else{
+                Reservation reservation = resDAO.getNextVaccination(user);
+                LocationVaccineAmount lva =locationDAO.getLocationVaccineAmount(reservation.getLocation_vaccine_amount_id());
+                VaccineCenter center = vaccineCenterDAO.getVaccineCenterById(lva.getVaccineCenterId());
+
+                String time = reservation.getVaccinationTime().toString().replace('T', ' ');
+                String vaccine = lva.getVaccineName();
+                String centerLoc = center.getCenterName() + ", " +center.getDistrictName()   + ", " +
+                        center.getCityName() + ", " + center.getRegionName();
+
                 out.println(
                 "<p>" +
                     "You are already registered for a vaccine. " +
                     "If you want to cancel your reservation, press the \"Cancel reservation\" button." +
-                "</p>"
+                "</p>" +
+                        "<h3>" + "Reservation info: " + "</h3>" +
+                        "<p>" + "Center: " + centerLoc + "</p>" +
+                        "<p>" + "Vaccine: " + vaccine + "</p>" +
+                        "<p>" + "Time: " + time + "</p>"
                 );
 
                 out.println(

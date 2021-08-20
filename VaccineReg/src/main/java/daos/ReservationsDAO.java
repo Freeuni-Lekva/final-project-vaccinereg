@@ -503,7 +503,6 @@ public class ReservationsDAO {
             stmt.setLong(1, userId);
             ResultSet res = stmt.executeQuery();
             if (res.next()) {
-
                 int result = res.getInt(1);
                 con.close();
                 return result;
@@ -517,6 +516,7 @@ public class ReservationsDAO {
 
     }
 
+
     public void deleteReservation(Long id){
         try{
             Connection con = ds.getConnection();
@@ -529,4 +529,5 @@ public class ReservationsDAO {
 
         }
     }
+
 }

@@ -480,15 +480,22 @@ public class ReservationsDAO {
         }
     }
 
-    public Reservation getReservationByUserId(Long userId) throws SQLException {
-        Connection con = ds.getConnection();
-        PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM " + reservationsTableName + " WHERE user_id = ?;");
-        stmt.setLong(1 , userId);
-        ResultSet res = stmt.executeQuery();
-        if(res.next()) {
-            return new Reservation(res.getLong("id"), res.getTimestamp("reservation_time").toLocalDateTime(), res.getTimestamp("vaccination_time").toLocalDateTime(), res.getLong("location_vaccine_amount_id"), res.getLong("user_id"));
-        }else{
+    public Reservation getReservationByUserId(Long userId)  {
+        try {
+            Connection con = ds.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT * FROM " + reservationsTableName + " WHERE user_id = ?;");
+            stmt.setLong(1, userId);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                Reservation result = new Reservation(res.getLong("id"), res.getTimestamp("reservation_time").toLocalDateTime(), res.getTimestamp("vaccination_time").toLocalDateTime(), res.getLong("location_vaccine_amount_id"), res.getLong("user_id"));
+                con.close();
+                return result;
+            } else {
+                con.close();
+                return null;
+            }
+        } catch (Exception ignored){
             return null;
         }
     }

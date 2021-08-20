@@ -51,7 +51,7 @@ public class ReservationCheckServlet extends HttpServlet {
             req.getServletContext().setAttribute("errorMessage", time + " is unavailable");
             req.getRequestDispatcher("WEB-INF/reservation-fail.jsp").forward(req, resp);
         }  else if(reservationsDAO.getReservationsCountByUserId(user.getPrivateNum())==1){
-            Reservation first = reservationsDAO.getNextVaccination(user);
+            Reservation first = reservationsDAO.getReservationByUserId(user.getPrivateNum());
             LocalDateTime minimumForSecond = first.getReservationTime().plusDays(21);
             LocalDateTime second = LocalDateTime.of(Integer.valueOf(date.substring(0,4)),Integer.valueOf(date.substring(5,7)) ,
                     Integer.valueOf(date.substring(8)) ,Integer.valueOf(time.substring(0,2)) ,Integer.valueOf(time.substring(3,5)));
